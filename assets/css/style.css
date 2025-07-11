@@ -1,0 +1,8 @@
+
+body { margin: 0; font-family: 'Arial', sans-serif; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 10px 30px; background-color: #f7f7f7; }
+.logo { height: 50px; }
+nav ul { list-style: none; display: flex; gap: 20px; padding: 0; margin: 0; }
+nav ul li { cursor: pointer; font-weight: bold; }
+.hero { text-align: center; padding: 80px 20px; background: linear-gradient(to right, #e52d27, #b31217); color: white; }
+footer { text-align: center; padding: 20px; background-color: #222; color: #ccc; font-size: 14px; }
