@@ -1,34 +1,128 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>(주)대광사업단</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주식회사 대광사업단</title>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .page-icon {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .page-icon a {
+      width: 40px;
+      height: 40px;
+      background-color: #0a356c;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .page-icon a:hover {
+      background-color: #1f4f8b;
+    }
+
+    nav {
+      background-color: #0a356c;
+      font-family: 'Noto Sans KR', sans-serif;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    nav ul li a:hover {
+      background-color: #1f4f8b;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="index.html">회사소개</a></li>
+      <li><a href="biz_electric.html">사업소개</a></li>
+      <li><a href="award.html">주요실적</a></li>
+      <li><a href="safety.html">지속가능경영</a></li>
+      <li><a href="talent.html">인재채용</a></li>
+      <li><a href="greeting.html">홍보센터</a></li>
+      <li><a href="quote.html">견적 및 문의</a></li>
+      <li><a href="notice.html">공지사항</a></li>
+    </ul>
+  </nav>
 
-<header id="navbar">
-  <div class="container">
-    <a href="index.html" class="logo">(주)대광사업단</a>
-    <nav>
-      <ul>
-        <li><a href="greeting.html">회사소개</a></li>
-        <li><a href="biz_electric.html">사업소개</a></li>
-        <li><a href="work_electric_eng.html">주요실적</a></li>
-        <li><a href="safety.html">지속가능경영</a></li>
-        <li><a href="talent.html">인재채용</a></li>
-        <li><a href="award.html">홍보센터</a></li>
-        <li><a href="quote.html">견적 및 문의</a></li>
-        <li><a href="notice.html">공지사항</a></li>
-      </ul>
-    </nav>
+  <div class="page-icon">
+    <a href="#page1">1</a>
+    <a href="#page2">2</a>
+    <a href="#page3">3</a>
   </div>
-</header>
 
-<div class="page-wrapper">
-  <h1>신뢰받는 전기·통신·소방 전문기업</h1>
-  <p>대광사업단 홈페이지에 오신 것을 환영합니다.<br>상단 메뉴를 클릭하여 각 페이지로 이동해보세요.</p>
-</div>
-<footer>&copy; 2025 (주)대광사업단 | Tel: 02-2689-0404</footer>
+  <section id="page1" style="background-color: #f2f2f2;">
+    <h1>대광사업단 홈페이지에 오신 것을 환영합니다</h1>
+    <p>Scroll을 내려 다음 내용을 확인하세요.</p>
+  </section>
+
+  <section id="page2" style="background-color: #e6f0ff;">
+    <h2>주요 사업 안내</h2>
+    <p>전기 · 통신 · 소방 분야에서의 전문성과 경험을 확인하세요.</p>
+  </section>
+
+  <section id="page3" style="background-color: #ffffff;">
+    <h2>문의 및 연락처</h2>
+    <p>보다 자세한 상담을 원하시면 견적 및 문의 메뉴를 이용해 주세요.</p>
+  </section>
 </body>
 </html>
