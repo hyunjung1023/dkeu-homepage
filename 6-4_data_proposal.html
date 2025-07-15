@@ -1,97 +1,125 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6-4 DATA PROPOSAL</title>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지명원 - 주식회사 대광사업단</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+    body {
       font-family: 'Noto Sans KR', sans-serif;
-      scroll-behavior: smooth;
+      padding-top: 80px;
     }
-    nav {
+    .navbar {
       background-color: #0a356c;
-      font-family: 'Noto Sans KR', sans-serif;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
     }
-    nav ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .navbar .nav-link,
+    .navbar .navbar-brand,
+    .navbar .dropdown-item {
+      color: white !important;
     }
-    nav ul li {
-      position: relative;
-    }
-    nav > ul > li {
-      margin: 0 15px;
-    }
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      padding: 15px 10px;
-      display: block;
-      font-weight: 500;
-    }
-    nav ul li:hover > a {
+    .navbar .dropdown-menu {
       background-color: #1f4f8b;
-      border-radius: 4px 4px 0 0;
     }
-    nav ul li ul {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #1f4f8b;
-      min-width: 180px;
-      z-index: 999;
-    }
-    nav ul li:hover ul {
-      display: block;
-    }
-    nav ul li ul li {
-      width: 100%;
-    }
-    nav ul li ul li a {
-      padding: 10px;
-      border-bottom: 1px solid #2e6aa3;
-    }
-    nav ul li ul li a:hover {
+    .navbar .dropdown-item:hover {
       background-color: #2e6aa3;
     }
-    main {
-      padding-top: 120px;
+    .main-content {
       text-align: center;
+      padding: 40px 20px;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="1_intro.html">회사소개</a></li>
-      <li><a href="2_biz.html">사업소개</a></li>
-      <li><a href="3_work.html">주요실적</a></li>
-      <li><a href="4_manage.html">지속가능경영</a></li>
-      <li><a href="5_job.html">인재채용</a></li>
-      <li><a href="6_data.html">홍보센터</a></li>
-      <li><a href="7_ask.html">견적 및 문의</a></li>
-      <li><a href="8_notice.html">공지사항</a></li>
-    </ul>
+  
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">대광사업단</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon bg-light rounded"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">회사소개</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="1-1_intro_greeting.html">인사말</a></li>
+              <li><a class="dropdown-item" href="1-2_intro_history.html">연혁 및 수상</a></li>
+              <li><a class="dropdown-item" href="1-3_intro_about.html">기업개요</a></li>
+              <li><a class="dropdown-item" href="1-4_intro_map.html">찾아오시는 길</a></li>
+              <li><a class="dropdown-item" href="1-5_intro_organization.html">조직도</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">사업소개</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="2-1_biz_electric.html">전기</a></li>
+              <li><a class="dropdown-item" href="2-2_biz_telecom.html">통신</a></li>
+              <li><a class="dropdown-item" href="2-3_biz_fire.html">소방</a></li>
+              <li><a class="dropdown-item" href="2-4_biz_partner.html">주요파트너</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">주요실적</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="3-1_work_electric_eng.html">전기공사</a></li>
+              <li><a class="dropdown-item" href="3-2_work_electric_design.html">전기설계</a></li>
+              <li><a class="dropdown-item" href="3-3_work_electric_supervision.html">전기감리</a></li>
+              <li><a class="dropdown-item" href="3-4_work_telecom_eng.html">통신공사</a></li>
+              <li><a class="dropdown-item" href="3-5_work_telecom_design.html">통신설계</a></li>
+              <li><a class="dropdown-item" href="3-6_work_telecom_supervision.html">통신감리</a></li>
+              <li><a class="dropdown-item" href="3-7_work_fire_eng.html">소방공사</a></li>
+              <li><a class="dropdown-item" href="3-8_work_fire_design.html">소방설계</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">지속가능경영</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="4-2_manage_safety.html">안전보건</a></li>
+              <li><a class="dropdown-item" href="4-3_manage_quality.html">품질환경</a></li>
+              <li><a class="dropdown-item" href="4-4_manage_ethics.html">인권윤리</a></li>
+              <li><a class="dropdown-item" href="4-5_manage_esg.html">ESG 경영</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">인재채용</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="5-1_job_talent.html">인재상</a></li>
+              <li><a class="dropdown-item" href="5-2_job_intro.html">직무소개</a></li>
+              <li><a class="dropdown-item" href="5-3_job_welfare.html">복리후생</a></li>
+              <li><a class="dropdown-item" href="5-4_job_vacancy.html">채용공고</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">홍보센터</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="6-1_data_award.html">수상실적</a></li>
+              <li><a class="dropdown-item" href="6-2_data_confirmation.html">신인도</a></li>
+              <li><a class="dropdown-item" href="6-3_data_certificate.html">인증서</a></li>
+              <li><a class="dropdown-item" href="6-4_data_proposal.html">지명원</a></li>
+              <li><a class="dropdown-item" href="6-5_data_news.html">뉴스</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">견적문의</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="7-1_ask_estimate.html">견적</a></li>
+              <li><a class="dropdown-item" href="7-2_ask_faq.html">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="8-1_notice_board.html">공지사항</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
-  <main>
-    <h1>6-4 DATA PROPOSAL</h1>
-    <p>내용이 준비 중입니다.</p>
-  </main>
+
+  <!-- 본문 -->
+  <div class="main-content">
+    <h1>지명원</h1>
+    <p>대광사업단 홈페이지에 방문해 주셔서 감사합니다.</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
