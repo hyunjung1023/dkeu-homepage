@@ -4,12 +4,124 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>주식회사 대광사업단</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Noto Sans KR', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 53, 108, 0.95);
+      color: white;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      align-items: center;
+      padding: 0.8rem 1rem;
+    }
+
+    nav ul li {
+      position: relative;
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem;
+      transition: background 0.3s;
+    }
+
+    nav ul li:hover > a {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+    }
+
+    nav ul li ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #1f4f8b;
+      display: none;
+      min-width: 180px;
+    }
+
+    nav ul li:hover ul {
+      display: block;
+    }
+
+    nav ul li ul li {
+      width: 100%;
+    }
+
+    nav ul li ul li a {
+      display: block;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    nav ul li ul li a:hover {
+      background-color: #2e6aa3;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      transition: all 0.5s ease;
+    }
+
+    .hero {
+      background: linear-gradient(to bottom right, #0a356c, #1f4f8b);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .section-light {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .section-dark {
+      background: #e2e8f0;
+      color: #222;
+    }
+  </style>
 </head>
 <body>
   <nav>
     <ul>
-      <li><a href="#">회사소개</a>
+      <li>
+        <a href="#">회사소개</a>
         <ul>
           <li><a href="1-1_intro_greeting.html">인사말</a></li>
           <li><a href="1-2_intro_history.html">연혁 및 수상</a></li>
@@ -18,7 +130,8 @@
           <li><a href="1-5_intro_organization.html">조직도</a></li>
         </ul>
       </li>
-      <li><a href="#">사업소개</a>
+      <li>
+        <a href="#">사업소개</a>
         <ul>
           <li><a href="2-1_biz_electric.html">전기</a></li>
           <li><a href="2-2_biz_telecom.html">통신</a></li>
@@ -26,7 +139,8 @@
           <li><a href="2-4_biz_partner.html">주요파트너</a></li>
         </ul>
       </li>
-      <li><a href="#">주요실적</a>
+      <li>
+        <a href="#">주요실적</a>
         <ul>
           <li><a href="3-1_work_electric_eng.html">전기공사</a></li>
           <li><a href="3-2_work_electric_design.html">전기설계</a></li>
@@ -38,7 +152,8 @@
           <li><a href="3-8_work_fire_design.html">소방설계</a></li>
         </ul>
       </li>
-      <li><a href="#">지속가능경영</a>
+      <li>
+        <a href="#">지속가능경영</a>
         <ul>
           <li><a href="4-2_manage_safety.html">안전보건 경영</a></li>
           <li><a href="4-3_manage_quality.html">품질환경 경영</a></li>
@@ -46,7 +161,8 @@
           <li><a href="4-5_manage_esg.html">ESG 경영</a></li>
         </ul>
       </li>
-      <li><a href="#">인재채용</a>
+      <li>
+        <a href="#">인재채용</a>
         <ul>
           <li><a href="5-1_job_talent.html">인재상</a></li>
           <li><a href="5-2_job_intro.html">직무소개</a></li>
@@ -54,7 +170,8 @@
           <li><a href="5-4_job_vacancy.html">채용공고</a></li>
         </ul>
       </li>
-      <li><a href="#">홍보센터</a>
+      <li>
+        <a href="#">홍보센터</a>
         <ul>
           <li><a href="6-1_data_award.html">수상실적</a></li>
           <li><a href="6-2_data_confirmation.html">신인도</a></li>
@@ -63,7 +180,8 @@
           <li><a href="6-5_data_news.html">뉴스</a></li>
         </ul>
       </li>
-      <li><a href="#">견적 및 문의</a>
+      <li>
+        <a href="#">견적 및 문의</a>
         <ul>
           <li><a href="7-1_ask_estimate.html">견적</a></li>
           <li><a href="7-2_ask_faq.html">FAQ</a></li>
@@ -72,9 +190,22 @@
       <li><a href="8-1_notice_board.html">공지사항</a></li>
     </ul>
   </nav>
-  <main>
-    <h1>주식회사 대광사업단 홈페이지에 오신 것을 환영합니다</h1>
-    <p>상단 메뉴에서 항목을 클릭하면 중분류 메뉴가 드롭다운으로 펼쳐집니다.</p>
-  </main>
+
+  <section class="hero">
+    <h1>주식회사 대광사업단</h1>
+    <p>전기 · 통신 · 소방 분야의 설계, 감리, 시공 전문 기업</p>
+  </section>
+
+  <section class="section-light">
+    <h2>기업소개</h2>
+    <p>고객 신뢰를 바탕으로 안전과 품질을 최우선하는 기업</p>
+  </section>
+
+  <section class="section-dark">
+    <h2>사업영역</h2>
+    <p>전기설비, 통신시스템, 소방설비 등 다양한 건설 서비스를 제공합니다.</p>
+  </section>
+
 </body>
 </html>
+
