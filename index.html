@@ -22,38 +22,64 @@
       top: 0;
       width: 100%;
       z-index: 1000;
-      overflow-x: auto;
     }
 
     nav ul {
       margin: 0;
-      padding: 10px;
+      padding: 0;
       list-style: none;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
-      background-color: #0a356c;
     }
 
     nav ul li {
-      margin: 5px 10px;
+      position: relative;
+    }
+
+    nav > ul > li {
+      margin: 0 15px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
       font-size: 14px;
-      padding: 8px 10px;
-      transition: all 0.3s ease;
-      font-weight: 500;
+      padding: 15px 10px;
       display: block;
-      white-space: nowrap;
+      font-weight: 500;
     }
 
-    nav ul li a:hover {
+    nav ul li:hover > a {
       background-color: #1f4f8b;
-      border-radius: 4px;
+      border-radius: 4px 4px 0 0;
+    }
+
+    nav ul li ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #1f4f8b;
+      min-width: 180px;
+      z-index: 999;
+    }
+
+    nav ul li:hover ul {
+      display: block;
+    }
+
+    nav ul li ul li {
+      width: 100%;
+    }
+
+    nav ul li ul li a {
+      padding: 10px;
+      border-bottom: 1px solid #2e6aa3;
+    }
+
+    nav ul li ul li a:hover {
+      background-color: #2e6aa3;
     }
 
     main {
@@ -65,45 +91,81 @@
 <body>
   <nav>
     <ul>
-      <li><a href="greeting.html">인사말</a></li>
-      <li><a href="history.html">연혁 및 수상</a></li>
-      <li><a href="about.html">기업개요</a></li>
-      <li><a href="map.html">찾아오시는 길</a></li>
-      <li><a href="organization.html">조직도</a></li>
-      <li><a href="biz_electric.html">전기</a></li>
-      <li><a href="biz_telecom.html">통신</a></li>
-      <li><a href="biz_fire.html">소방</a></li>
-      <li><a href="biz_partner.html">주요파트너</a></li>
-      <li><a href="work_electric_eng.html">전기공사</a></li>
-      <li><a href="work_electric_design.html">전기설계</a></li>
-      <li><a href="work_electric_supervision.html">전기감리</a></li>
-      <li><a href="work_telecom_eng.html">통신공사</a></li>
-      <li><a href="work_telecom_design.html">통신설계</a></li>
-      <li><a href="work_telecom_supervision.html">통신감리</a></li>
-      <li><a href="work_fire_eng.html">소방공사</a></li>
-      <li><a href="work_fire_design.html">소방설계</a></li>
-      <li><a href="safety.html">안전,보건 경영</a></li>
-      <li><a href="quality.html">품질,환경 경영</a></li>
-      <li><a href="ethics.html">인권,윤리 경영</a></li>
-      <li><a href="esg.html">ESG 경영</a></li>
-      <li><a href="talent.html">인재상</a></li>
-      <li><a href="job_intro.html">직무소개</a></li>
-      <li><a href="welfare.html">복리후생</a></li>
-      <li><a href="recruit.html">채용공고</a></li>
-      <li><a href="award.html">수상실적</a></li>
-      <li><a href="intro.html">신인도</a></li>
-      <li><a href="certificate.html">인증서</a></li>
-      <li><a href="branch.html">지명원</a></li>
-      <li><a href="news.html">뉴스</a></li>
-      <li><a href="quote.html">견적</a></li>
-      <li><a href="faq.html">FAQ</a></li>
+      <li>
+        <a href="#">회사소개</a>
+        <ul>
+          <li><a href="greeting.html">인사말</a></li>
+          <li><a href="history.html">연혁 및 수상</a></li>
+          <li><a href="about.html">기업개요</a></li>
+          <li><a href="map.html">찾아오시는 길</a></li>
+          <li><a href="organization.html">조직도</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">사업소개</a>
+        <ul>
+          <li><a href="biz_electric.html">전기</a></li>
+          <li><a href="biz_telecom.html">통신</a></li>
+          <li><a href="biz_fire.html">소방</a></li>
+          <li><a href="biz_partner.html">주요파트너</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">주요실적</a>
+        <ul>
+          <li><a href="work_electric_eng.html">전기공사</a></li>
+          <li><a href="work_electric_design.html">전기설계</a></li>
+          <li><a href="work_electric_supervision.html">전기감리</a></li>
+          <li><a href="work_telecom_eng.html">통신공사</a></li>
+          <li><a href="work_telecom_design.html">통신설계</a></li>
+          <li><a href="work_telecom_supervision.html">통신감리</a></li>
+          <li><a href="work_fire_eng.html">소방공사</a></li>
+          <li><a href="work_fire_design.html">소방설계</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">지속가능경영</a>
+        <ul>
+          <li><a href="safety.html">안전,보건 경영</a></li>
+          <li><a href="quality.html">품질,환경 경영</a></li>
+          <li><a href="ethics.html">인권,윤리 경영</a></li>
+          <li><a href="esg.html">ESG 경영</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">인재채용</a>
+        <ul>
+          <li><a href="talent.html">인재상</a></li>
+          <li><a href="job_intro.html">직무소개</a></li>
+          <li><a href="welfare.html">복리후생</a></li>
+          <li><a href="recruit.html">채용공고</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">홍보센터</a>
+        <ul>
+          <li><a href="award.html">수상실적</a></li>
+          <li><a href="intro.html">신인도</a></li>
+          <li><a href="certificate.html">인증서</a></li>
+          <li><a href="branch.html">지명원</a></li>
+          <li><a href="news.html">뉴스</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">견적 및 문의</a>
+        <ul>
+          <li><a href="quote.html">견적</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </li>
       <li><a href="notice.html">공지사항</a></li>
     </ul>
   </nav>
   <main>
     <h1>주식회사 대광사업단 홈페이지에 오신 것을 환영합니다</h1>
-    <p>상단 메뉴에서 각 페이지를 클릭해 이동해보세요.</p>
+    <p>상단 메뉴에서 항목을 클릭하면 중분류 메뉴가 드롭다운으로 펼쳐집니다.</p>
   </main>
 </body>
 </html>
+
 
