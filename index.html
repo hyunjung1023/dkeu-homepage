@@ -22,32 +22,33 @@
       top: 0;
       width: 100%;
       z-index: 1000;
+      overflow-x: auto;
     }
 
     nav ul {
       margin: 0;
-      padding: 0;
+      padding: 10px;
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      height: auto;
       background-color: #0a356c;
     }
 
     nav ul li {
-      margin: 0 10px;
+      margin: 5px 10px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
       font-size: 14px;
-      padding: 10px 10px;
+      padding: 8px 10px;
       transition: all 0.3s ease;
       font-weight: 500;
       display: block;
+      white-space: nowrap;
     }
 
     nav ul li a:hover {
@@ -56,7 +57,7 @@
     }
 
     main {
-      padding-top: 70px;
+      padding-top: 120px;
       text-align: center;
     }
   </style>
@@ -101,6 +102,8 @@
   </nav>
   <main>
     <h1>주식회사 대광사업단 홈페이지에 오신 것을 환영합니다</h1>
+    <p>상단 메뉴에서 각 페이지를 클릭해 이동해보세요.</p>
   </main>
 </body>
 </html>
+
