@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 휴대폰에서도 글씨가 잘 보이게 합니다 -->
     <title>대광사업단 — 메인</title> <!-- 브라우저 탭에 보일 제목입니다 -->
 
-    <!-- /menu에서 사용하는 공용 스타일을 그대로 불러옵니다(상단바/드롭다운/버튼을 완전 동일화) -->
+    <!-- /menu에서 사용하는 공용 스타일을 그대로 불러옵니다(상단바/드롭다운/버튼 동일화) -->
     <link rel="stylesheet" href="/menu/css/style.css" /> <!-- /menu와 같은 상단 모양을 보장합니다 -->
 
     <style>
@@ -29,8 +29,48 @@
         min-height: 100svh; /* 브라우저 주소창 변화에도 안정적인 전체 높이를 씁니다 */
         display:grid; /* 안쪽 배치를 쉽게 하기 위해 그리드를 씁니다 */
         align-content:center; /* 내용이 세로로 가운데 오게 합니다 */
-        background: var(--bg); /* 배경은 흰색(#FFFFFF)을 유지합니다 */
+        background: var(--bg); /* 기본은 흰 배경입니다 */
       } /* 섹션 기본 규칙의 끝입니다 */
+
+      /* === [섹션 배경 이미지를 화면에 꽉 채우는 공통 규칙] === */
+      .page.bg{ /* 배경사진을 쓰는 섹션에 붙일 공통 클래스입니다 */
+        position:relative;            /* ::before 절대배치를 위한 기준점입니다 */
+        background:transparent;       /* 흰 배경을 지워서 ::before가 보이게 합니다 ← 핵심 수정 */
+        color:#fff;                   /* 사진 위에서 글자가 잘 보이도록 흰색으로 */
+      }
+      .page.bg::before{ /* 진짜 배경 이미지를 그리는 보조 레이어입니다 */
+        content:"";                   /* 레이어를 만들기 위한 빈 내용입니다 */
+        position:absolute;            /* 섹션을 가득 덮도록 절대 위치를 씁니다 */
+        inset:0;                      /* 위·오른쪽·아래·왼쪽을 모두 0으로 맞춰 꽉 채웁니다 */
+        background-position:center;   /* 사진의 가운데를 기준으로 맞춥니다 */
+        background-size:cover;        /* 사진이 늘어나더라도 빈 칸 없이 꽉 채웁니다 */
+        background-repeat:no-repeat;  /* 사진이 반복되지 않게 합니다 */
+        filter:brightness(.72);       /* 사진을 살짝 어둡게 해 글자가 잘 보이게 합니다 */
+        z-index:-1;                   /* 글자/콘텐츠 뒤쪽에 위치시킵니다 */
+        pointer-events:none;          /* 클릭 이벤트를 가로채지 않게 합니다 */
+      }
+
+      /* === [각 섹션별로 다른 배경 사진을 지정합니다] === */
+      #s1.page.bg::before{
+        background-image:
+          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
+          url('/img/hero-1.jpg'); /* 전기2.jpg */
+      }
+      #s2.page.bg::before{
+        background-image:
+          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
+          url('/img/hero-2.jpg'); /* 전기9.jpg */
+      }
+      #s3.page.bg::before{
+        background-image:
+          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
+          url('/img/hero-3.jpg'); /* 통신4.jpg */
+      }
+      #s4.page.bg::before{
+        background-image:
+          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
+          url('/img/hero-4.jpg'); /* 통신7.jpg */
+      }
 
       /* 히어로(첫 섹션)는 /menu의 클래스 체계를 그대로 사용합니다 */
       .hero .wrap{ padding: 44px 20px; } /* 좌우 여백과 위아래 여백을 지정합니다 */
@@ -60,8 +100,7 @@
       .dotnav a:hover{ transform:scale(1.15); } /* 점을 살짝 키워줍니다 */
 
       /* 스크롤 유도 화살표(첫 섹션 하단) */
-      .scroll-hint{ position:absolute; left:50%; bottom:14px; transform:translateX(-50%); font-size:12px; color:var(--muted); }
-      .scroll-hint::after{ content:"↓"; display:block; text-align:center; margin-top:4px; }
+      .scroll-hint{ position:absolute; left:50%; bottom:14px; transform:translateX(-50%); font-size:12px; color:#ffffffd8; }
 
       /* 간단한 페이드업 등장 애니메이션 */
       .reveal{ opacity:0; transform:translateY(8px); transition: opacity 320ms ease, transform 320ms ease; }
@@ -73,52 +112,12 @@
         .dotnav{ right:10px; } /* 점 네비를 조금 안쪽으로 */
       }
 
-/* === [섹션 배경 이미지를 화면에 꽉 채우는 공통 규칙] ====================== */
-.page.bg{ /* 배경사진을 쓰는 섹션에 붙일 공통 클래스입니다 */
-  position:relative; /* 배경 레이어를 이 섹션 안에 고정하기 위해 필요합니다 */
-  color:#fff;        /* 기본 글자색을 흰색으로 바꿉니다(사진 위에서 잘 보이게) */
-}
-.page.bg::before{ /* 진짜 배경 이미지를 그리는 보조 레이어입니다 */
-  content:"";               /* 레이어를 만들기 위한 빈 내용입니다 */
-  position:absolute;        /* 섹션을 가득 덮도록 절대 위치를 씁니다 */
-  inset:0;                  /* 위·오른쪽·아래·왼쪽을 모두 0으로 맞춰 꽉 채웁니다 */
-  background-position:center;     /* 사진의 가운데를 기준으로 맞춥니다 */
-  background-size:cover;          /* 사진이 늘어나더라도 빈 칸 없이 꽉 채웁니다 */
-  background-repeat:no-repeat;    /* 사진이 반복되지 않게 합니다 */
-  filter:brightness(.72);         /* 사진을 살짝 어둡게 해 글자가 잘 보이게 합니다 */
-  z-index:-1;                     /* 이 레이어가 글자보다 뒤에 오게 합니다 */
-}
-
-/* === [각 섹션별로 다른 배경 사진을 지정합니다] =========================== */
-#s1.page.bg::before{ /* 1번 화면의 배경입니다 */
-  background-image:
-    linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)), /* 살짝 어둡게 */
-    url('/img/hero-1.jpg'); /* 전기2.jpg를 hero-1.jpg로 올렸다고 가정합니다 */
-}
-#s2.page.bg::before{ /* 2번 화면의 배경입니다 */
-  background-image:
-    linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-    url('/img/hero-2.jpg'); /* 전기9.jpg */
-}
-#s3.page.bg::before{ /* 3번 화면의 배경입니다 */
-  background-image:
-    linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-    url('/img/hero-3.jpg'); /* 통신4.jpg */
-}
-#s4.page.bg::before{ /* 4번 화면의 배경입니다 */
-  background-image:
-    linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-    url('/img/hero-4.jpg'); /* 통신7.jpg */
-}
-
-/* === [사진 위 버튼/텍스트 가독성 보정] =================================== */
-.page.bg .eyebrow{ color:#fff; opacity:.95; } /* 얇은 영어 소제목도 흰색으로 */
-.page.bg .btn-ghost{ border-color:#ffffffbf; color:#fff; } /* 테두리형 버튼을 하얀색으로 */
-.page.bg .btn-ghost:hover{ background:#ffffff1a; } /* 호버 시 은은한 흰 배경 */
-.page.bg .hero-card,
-.page.bg .cta-box{ color:var(--text); } /* 흰 박스 안의 글자는 원래 색(#333) 유지 */
-
-      
+      /* 사진 위 버튼/텍스트 가독성 보정 */
+      .page.bg .eyebrow{ color:#fff; opacity:.95; }
+      .page.bg .btn-ghost{ border-color:#ffffffbf; color:#fff; }
+      .page.bg .btn-ghost:hover{ background:#ffffff1a; }
+      .page.bg .hero-card,
+      .page.bg .cta-box{ color:var(--text); }
     </style> <!-- 메인 전용(섹션/스냅/점네비) 스타일의 끝입니다 -->
   </head> <!-- 설정 영역의 끝입니다 -->
 
@@ -138,197 +137,183 @@
     </header> <!-- 헤더 끝 -->
 
     <!-- 우측 점 네비게이션(4개의 섹션으로 이동) -->
-    <nav class="dotnav" aria-label="섹션 이동"> <!-- 점 네비게이션입니다 -->
-      <a href="#s1" id="d1">1</a> <!-- 1번 섹션으로 이동합니다 -->
-      <a href="#s2" id="d2">2</a> <!-- 2번 섹션으로 이동합니다 -->
-      <a href="#s3" id="d3">3</a> <!-- 3번 섹션으로 이동합니다 -->
-      <a href="#s4" id="d4">4</a> <!-- 4번 섹션으로 이동합니다 -->
-    </nav> <!-- 점 네비게이션의 끝입니다 -->
+    <nav class="dotnav" aria-label="섹션 이동">
+      <a href="#s1" id="d1">1</a>
+      <a href="#s2" id="d2">2</a>
+      <a href="#s3" id="d3">3</a>
+      <a href="#s4" id="d4">4</a>
+    </nav>
 
     <!-- 스냅 스크롤이 적용될 메인 컨테이너입니다 -->
-    <main class="pages"> <!-- 각 섹션이 화면단위로 넘어갑니다 -->
-
+    <main class="pages">
       <!-- 섹션 1: 히어로(첫 화면) -->
-      <section class="page hero bg" id="s1"> <!-- 1번 화면: 배경사진을 쓰므로 bg 클래스 추가 -->
-        <div class="wrap hero-grid"> <!-- 내용을 좌우로 나눠 담는 상자입니다 -->
-          <div class="hero-left reveal"> <!-- 왼쪽 설명 칸입니다 -->
-            <div class="eyebrow">WHO WE ARE.</div> <!-- HPS처럼 얇은 영어 소제목입니다 -->
-            <h1 class="hero-title">전기·통신·소방<br>토탈 솔루션 파트너</h1> <!-- 가장 크게 보이는 문장입니다 -->
-            <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧고 선명한 설명 문장입니다 -->
-            <div class="hero-ctas" style="margin-top:14px;"> <!-- 중요한 이동 버튼들입니다 -->
-              <a class="btn-solid" href="/menu/#/3-1_work_electric_eng">주요실적 보기</a> <!-- 실적으로 이동합니다 -->
-              <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">견적문의</a> <!-- 견적문의로 이동합니다 -->
-            </div> <!-- 버튼 묶음의 끝입니다 -->
-          </div> <!-- 왼쪽 설명 칸의 끝입니다 -->
-
-          <div class="hero-card reveal"> <!-- 오른쪽 바로가기 카드 상자입니다 -->
-            <strong class="quick-title">Business Solutions</strong> <!-- 카드 제목입니다 -->
-            <div class="biz-cards"> <!-- 4개의 큰 버튼을 2×2로 배치합니다 -->
-              <a class="biz-card" href="/menu/#/2-1_biz_electric"><span>전기</span></a> <!-- 전기 사업으로 이동합니다 -->
-              <a class="biz-card" href="/menu/#/2-2_biz_telecom"><span>통신</span></a> <!-- 통신 사업으로 이동합니다 -->
-              <a class="biz-card" href="/menu/#/2-3_biz_fire"><span>소방</span></a> <!-- 소방 사업으로 이동합니다 -->
-              <a class="biz-card" href="/menu/#/2-4_biz_partner"><span>파트너</span></a> <!-- 파트너 소개로 이동합니다 -->
-            </div> <!-- 2×2 배치의 끝입니다 -->
-          </div> <!-- 오른쪽 카드 상자의 끝입니다 -->
-        </div> <!-- 히어로 안쪽 상자의 끝입니다 -->
-
-        <div class="scroll-hint">스크롤하여 더 보기</div> <!-- 아래로 스크롤 안내입니다 -->
-      </section> <!-- 섹션 1의 끝입니다 -->
+      <section class="page hero bg" id="s1">
+        <div class="wrap hero-grid">
+          <div class="hero-left reveal">
+            <div class="eyebrow">WHO WE ARE.</div>
+            <h1 class="hero-title">전기·통신·소방<br>토탈 솔루션 파트너</h1>
+            <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p>
+            <div class="hero-ctas" style="margin-top:14px;">
+              <a class="btn-solid" href="/menu/#/3-1_work_electric_eng">주요실적 보기</a>
+              <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">견적문의</a>
+            </div>
+          </div>
+          <div class="hero-card reveal">
+            <strong class="quick-title">Business Solutions</strong>
+            <div class="biz-cards">
+              <a class="biz-card" href="/menu/#/2-1_biz_electric"><span>전기</span></a>
+              <a class="biz-card" href="/menu/#/2-2_biz_telecom"><span>통신</span></a>
+              <a class="biz-card" href="/menu/#/2-3_biz_fire"><span>소방</span></a>
+              <a class="biz-card" href="/menu/#/2-4_biz_partner"><span>파트너</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-hint">스크롤하여 더 보기</div>
+      </section>
 
       <!-- 섹션 2: 사업영역 강조 -->
-     <section class="page section-business bg" id="s2"> <!-- 2번 화면도 bg 추가 -->
-        <div class="wrap reveal"> <!-- 가운데 정렬 상자입니다 -->
-          <div class="eyebrow">WHAT WE DO.</div> <!-- 얇은 영어 소제목입니다 -->
-          <h2 class="hero-title" style="margin:6px 0 10px;">사업영역</h2> <!-- 큰 제목입니다 -->
-          <p class="desc">전기·통신·소방 분야의 설계·시공·감리를 통합 제공해 드립니다.</p> <!-- 설명 글입니다 -->
-
-          <div class="biz-cards" style="margin-top:12px;"> <!-- 2×2 큰 카드입니다 -->
-            <a class="biz-card" href="/menu/#/2-1_biz_electric"><span>전기 설계·시공</span></a> <!-- 전기 링크입니다 -->
-            <a class="biz-card" href="/menu/#/2-2_biz_telecom"><span>통신 인프라</span></a> <!-- 통신 링크입니다 -->
-            <a class="biz-card" href="/menu/#/2-3_biz_fire"><span>소방 시스템</span></a> <!-- 소방 링크입니다 -->
-            <a class="biz-card" href="/menu/#/3-1_work_electric_eng"><span>대표 실적</span></a> <!-- 실적 링크입니다 -->
-          </div> <!-- 카드 묶음의 끝입니다 -->
-        </div> <!-- 가운데 상자의 끝입니다 -->
-      </section> <!-- 섹션 2의 끝입니다 -->
+      <section class="page section-business bg" id="s2">
+        <div class="wrap reveal">
+          <div class="eyebrow">WHAT WE DO.</div>
+          <h2 class="hero-title" style="margin:6px 0 10px;">사업영역</h2>
+          <p class="desc">전기·통신·소방 분야의 설계·시공·감리를 통합 제공해 드립니다.</p>
+          <div class="biz-cards" style="margin-top:12px;">
+            <a class="biz-card" href="/menu/#/2-1_biz_electric"><span>전기 설계·시공</span></a>
+            <a class="biz-card" href="/menu/#/2-2_biz_telecom"><span>통신 인프라</span></a>
+            <a class="biz-card" href="/menu/#/2-3_biz_fire"><span>소방 시스템</span></a>
+            <a class="biz-card" href="/menu/#/3-1_work_electric_eng"><span>대표 실적</span></a>
+          </div>
+        </div>
+      </section>
 
       <!-- 섹션 3: 핵심 지표(KPI) -->
-     <section class="page section-kpi bg" id="s3"> <!-- 3번 화면도 bg 추가 -->
-        <div class="wrap"> <!-- 가운데 상자입니다 -->
-          <div class="eyebrow">OUR STRENGTH.</div> <!-- 얇은 영어 소제목입니다 -->
-          <h2 class="hero-title" style="margin:6px 0 10px;">숫자로 보는 대광</h2> <!-- 큰 제목입니다 -->
-          <div class="kpi-grid"> <!-- 3칸의 KPI 그리드입니다 -->
-            <div class="kpi-card reveal"> <!-- 첫 번째 카드입니다 -->
-              <div class="kpi-num" data-count="25">0</div> <!-- 25까지 올라갈 숫자입니다 -->
-              <div class="kpi-label">Years<br>설립 후</div> <!-- 설명입니다 -->
-            </div> <!-- 카드의 끝입니다 -->
-            <div class="kpi-card reveal"> <!-- 두 번째 카드입니다 -->
-              <div class="kpi-num" data-count="630">0</div> <!-- 630까지 올라갈 숫자입니다 -->
-              <div class="kpi-label">명<br>함께하는 직원</div> <!-- 설명입니다 -->
-            </div> <!-- 카드의 끝입니다 -->
-            <div class="kpi-card reveal"> <!-- 세 번째 카드입니다 -->
-              <div class="kpi-num" data-count="905">0</div> <!-- 905까지 올라갈 숫자입니다 -->
-              <div class="kpi-label">억<br>연간 매출(참고)</div> <!-- 설명입니다 -->
-            </div> <!-- 카드의 끝입니다 -->
-          </div> <!-- KPI 그리드의 끝입니다 -->
-        </div> <!-- 가운데 상자의 끝입니다 -->
-      </section> <!-- 섹션 3의 끝입니다 -->
+      <section class="page section-kpi bg" id="s3">
+        <div class="wrap">
+          <div class="eyebrow">OUR STRENGTH.</div>
+          <h2 class="hero-title" style="margin:6px 0 10px;">숫자로 보는 대광</h2>
+          <div class="kpi-grid">
+            <div class="kpi-card reveal">
+              <div class="kpi-num" data-count="25">0</div>
+              <div class="kpi-label">Years<br>설립 후</div>
+            </div>
+            <div class="kpi-card reveal">
+              <div class="kpi-num" data-count="630">0</div>
+              <div class="kpi-label">명<br>함께하는 직원</div>
+            </div>
+            <div class="kpi-card reveal">
+              <div class="kpi-num" data-count="905">0</div>
+              <div class="kpi-label">억<br>연간 매출(참고)</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- 섹션 4: 콜투액션(문의/바로가기) -->
-     <section class="page section-cta bg" id="s4"> <!-- 4번 화면도 bg 추가 -->
-        <div class="wrap"> <!-- 가운데 상자입니다 -->
-          <div class="cta-box reveal"> <!-- 하얀 카드 상자입니다 -->
-            <div class="cta-title">프로젝트를 시작해 볼까요?</div> <!-- 굵은 제목입니다 -->
-            <div class="cta-sub">간단한 개요만 알려주시면 빠르게 검토하여 연락드리겠습니다.</div> <!-- 설명 문장입니다 -->
-            <div class="cta-actions"> <!-- 버튼 묶음입니다 -->
-              <a class="btn-solid" href="/menu/#/7-1_ask_estimate">견적/문의 보내기</a> <!-- 문의 페이지로 이동합니다 -->
-              <a class="btn-ghost" href="/menu/#/8-1_notice_board">공지/뉴스 보기</a> <!-- 공지로 이동합니다 -->
-            </div> <!-- 버튼 묶음의 끝입니다 -->
-          </div> <!-- 카드 상자의 끝입니다 -->
-        </div> <!-- 가운데 상자의 끝입니다 -->
-      </section> <!-- 섹션 4의 끝입니다 -->
+      <section class="page section-cta bg" id="s4">
+        <div class="wrap">
+          <div class="cta-box reveal">
+            <div class="cta-title">프로젝트를 시작해 볼까요?</div>
+            <div class="cta-sub">간단한 개요만 알려주시면 빠르게 검토하여 연락드리겠습니다.</div>
+            <div class="cta-actions">
+              <a class="btn-solid" href="/menu/#/7-1_ask_estimate">견적/문의 보내기</a>
+              <a class="btn-ghost" href="/menu/#/8-1_notice_board">공지/뉴스 보기</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-    </main> <!-- 스냅 스크롤 컨테이너의 끝입니다 -->
-
-    <!-- 푸터: /menu와 동일한 구조를 사용하여 하단도 통일합니다 -->
-    <footer> <!-- 맨 아래 회사 정보입니다 -->
-      <div class="wrap footer-grid"> <!-- 푸터 안쪽 배치입니다 -->
-        <div class="f-brand"> <!-- 회사 이름/주소 구역입니다 -->
-          <div class="f-title">주식회사 대광사업단</div> <!-- 회사명입니다 -->
-          <div class="f-text">서울특별시 금천구 (예시 주소) · 02-000-0000</div> <!-- 간단한 주소/연락처입니다 -->
-        </div> <!-- 회사 정보 구역의 끝입니다 -->
-        <div class="f-links"> <!-- 빠른 링크 모음입니다 -->
-          <a href="/menu/#/1-3_intro_about">기업개요</a> <!-- /menu 해시 라우팅 -->
+    <!-- 푸터: /menu와 동일한 구조 -->
+    <footer>
+      <div class="wrap footer-grid">
+        <div class="f-brand">
+          <div class="f-title">주식회사 대광사업단</div>
+          <div class="f-text">서울특별시 금천구 (예시 주소) · 02-000-0000</div>
+        </div>
+        <div class="f-links">
+          <a href="/menu/#/1-3_intro_about">기업개요</a>
           <a href="/menu/#/6-3_data_certificate">인증서</a>
           <a href="/menu/#/8-1_notice_board">공지사항</a>
           <a href="/menu/#/7-1_ask_estimate">문의하기</a>
-        </div> <!-- 빠른 링크 모음의 끝입니다 -->
-      </div> <!-- 푸터 안쪽의 끝입니다 -->
-    </footer> <!-- 푸터의 끝입니다 -->
+        </div>
+      </div>
+    </footer>
 
     <!-- 상단 드롭다운 + 스크롤 인터랙션 스크립트 -->
     <script type="module">
-      import { SITE_MAP } from '/menu/js/data/site_map.js'; // /menu의 메뉴 데이터를 그대로 가져옵니다
+      import { SITE_MAP } from '/menu/js/data/site_map.js';
 
-      const $ = (sel) => document.querySelector(sel); // 선택자를 받아 요소를 찾는 간단한 도우미입니다
+      const $ = (sel) => document.querySelector(sel);
 
-      // 1) 메인 상단 드롭다운 메뉴를 만듭니다( /menu 와 동일 )
-      function buildTopNavRoot(){ // 상단 네비게이션을 그립니다
-        const nav = $('#topNav'); // 상단 네비게이션 상자입니다
-        nav.innerHTML = ''; // 혹시 이전 내용이 있으면 지웁니다
-        SITE_MAP.forEach(group => { // 대분류를 하나씩 처리합니다
-          const btn = document.createElement('button'); // 버튼을 만듭니다
-          btn.className = 'menu-btn'; // 버튼 모양을 적용합니다
-          btn.textContent = group.title; // 대분류 이름을 씁니다
-          const dd = document.createElement('div'); // 드롭다운 상자를 만듭니다
-          dd.className = 'dropdown'; // 드롭다운 스타일을 적용합니다
-          group.items.forEach(it => { // 중분류를 하나씩 넣습니다
-            const a = document.createElement('a'); // 링크를 만듭니다
-            a.href = `/menu/#/${it.code}`; // /menu로 가서 해시 라우팅으로 열리게 합니다
-            a.textContent = it.title; // 항목 이름을 씁니다
-            dd.appendChild(a); // 드롭다운에 붙입니다
+      function buildTopNavRoot(){
+        const nav = $('#topNav');
+        nav.innerHTML = '';
+        SITE_MAP.forEach(group => {
+          const btn = document.createElement('button');
+          btn.className = 'menu-btn';
+          btn.textContent = group.title;
+          const dd = document.createElement('div');
+          dd.className = 'dropdown';
+          group.items.forEach(it => {
+            const a = document.createElement('a');
+            a.href = `/menu/#/${it.code}`;
+            a.textContent = it.title;
+            dd.appendChild(a);
           });
-          btn.appendChild(dd); // 버튼 밑에 드롭다운을 붙입니다
-          nav.appendChild(btn); // 상단 네비게이션에 버튼을 추가합니다
+          btn.appendChild(dd);
+          nav.appendChild(btn);
         });
-      } // 상단 드롭다운 생성 함수의 끝입니다
+      }
 
-      // 2) KPI 숫자를 예쁘게 올라가게 합니다(섹션 3에서 노출될 때 시작)
-      function animateKPIs(){ // 히어로의 큰 숫자를 올려주는 함수입니다
-        document.querySelectorAll('.kpi-num').forEach(el=>{ // 모든 숫자 칸을 돌면서
-          const target = parseInt(el.dataset.count||'0',10); // 목표 숫자를 읽습니다
-          const dur = 900; // 애니메이션 시간을 0.9초로 정합니다
-          let start=null; // 시작 시간을 저장할 변숩니다
-          function step(t){ // 한 프레임마다 호출되는 함수입니다
-            if(!start) start=t; // 처음 부르면 시작 시간을 기록합니다
-            const p = Math.min((t-start)/dur, 1); // 0~1 사이의 진행률을 구합니다
-            el.textContent = Math.floor(target*p).toLocaleString(); // 진행률만큼 숫자를 올려 적습니다
-            if(p<1) requestAnimationFrame(step); // 아직 1이 아니면 다음 프레임을 예약합니다
+      function animateKPIs(){
+        document.querySelectorAll('.kpi-num').forEach(el=>{
+          const target = parseInt(el.dataset.count||'0',10);
+          const dur = 900;
+          let start=null;
+          function step(t){
+            if(!start) start=t;
+            const p = Math.min((t-start)/dur, 1);
+            el.textContent = Math.floor(target*p).toLocaleString();
+            if(p<1) requestAnimationFrame(step);
           }
-          requestAnimationFrame(step); // 애니메이션을 시작합니다
+          requestAnimationFrame(step);
         });
-      } // KPI 애니메이션 함수의 끝입니다
+      }
 
-      // 3) 인터섹션 옵저버: 섹션 등장 애니메이션 + 점 네비 활성화 + KPI 트리거
-      function wireScrollEffects(){ // 스크롤과 관련된 효과를 연결합니다
-        const dots = [$('#d1'), $('#d2'), $('#d3'), $('#d4')]; // 점 네비게이션 앵커들입니다
-        const sections = ['s1','s2','s3','s4'].map(id=>document.getElementById(id)); // 4개의 섹션입니다
+      function wireScrollEffects(){
+        const dots = [$('#d1'), $('#d2'), $('#d3'), $('#d4')];
+        const sections = ['s1','s2','s3','s4'].map(id=>document.getElementById(id));
         const io = new IntersectionObserver((entries)=>{
           entries.forEach(en=>{
-            if(en.isIntersecting){ // 섹션이 화면에 보이면
-              // 3-1) 해당 섹션 안의 .reveal 요소들을 순차 등장시킵니다
+            if(en.isIntersecting){
               en.target.querySelectorAll('.reveal').forEach((el,i)=>{
-                setTimeout(()=>el.classList.add('on'), i*40); // 약간의 간격을 두고 켭니다
+                setTimeout(()=>el.classList.add('on'), i*40);
               });
-              // 3-2) 점 네비 활성화 표시를 바꿉니다
-              const idx = sections.indexOf(en.target); // 몇 번째 섹션인지 찾습니다
-              dots.forEach(d=>d.classList.remove('active')); // 모두 끕니다
-              if(dots[idx]) dots[idx].classList.add('active'); // 해당 점만 켭니다
-              // 3-3) KPI 섹션이 처음 보일 때만 숫자를 올립니다
-              if(en.target.id==='s3' && !en.target._kpiDone){ // s3가 처음 보이면
-                animateKPIs(); // 숫자 애니메이션을 실행합니다
-                en.target._kpiDone = true; // 다시 하지 않도록 표시합니다
+              const idx = sections.indexOf(en.target);
+              dots.forEach(d=>d.classList.remove('active'));
+              if(dots[idx]) dots[idx].classList.add('active');
+              if(en.target.id==='s3' && !en.target._kpiDone){
+                animateKPIs();
+                en.target._kpiDone = true;
               }
             }
           });
-        }, { threshold:0.55 }); // 섹션의 55%가 보이면 "보인다"로 판단합니다
-        sections.forEach(sec=>io.observe(sec)); // 4개의 섹션을 관찰합니다
-      } // 스크롤 효과 연결 함수의 끝입니다
+        }, { threshold:0.55 });
+        sections.forEach(sec=>io.observe(sec));
+      }
 
-      // 4) 언어 버튼은 간단 안내만 띄웁니다
-      function wireLangButtons(){ // KR/EN 버튼 안내입니다
-        const kr = document.getElementById('langKR'); // KR 버튼입니다
-        const en = document.getElementById('langEN'); // EN 버튼입니다
+      function wireLangButtons(){
+        const kr = document.getElementById('langKR');
+        const en = document.getElementById('langEN');
         if(kr) kr.onclick = ()=>alert('한국어가 기본입니다.');
         if(en) en.onclick = ()=>alert('English version is under preparation.');
-      } // 언어 버튼 연결 함수의 끝입니다
+      }
 
-      // 5) 초기 실행
-      window.addEventListener('DOMContentLoaded', () => { // 문서가 준비되면
-        buildTopNavRoot(); // 상단 드롭다운 메뉴를 그리고
-        wireScrollEffects(); // 스크롤 효과들을 연결하고
-        wireLangButtons(); // 언어 버튼을 연결합니다
-      }); // 초기 실행의 끝입니다
-    </script> <!-- 스크립트의 끝입니다 -->
-  </body> <!-- 화면 영역의 끝입니다 -->
-</html> <!-- 문서의 끝입니다 -->
-
+      window.addEventListener('DOMContentLoaded', () => {
+        buildTopNavRoot();
+        wireScrollEffects();
+        wireLangButtons();
+      });
+    </script>
+  </body>
+</html>
