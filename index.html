@@ -1,0 +1,53 @@
+<!DOCTYPE html> <!-- 문서가 HTML5임을 알려주는 선언입니다 -->
+<html lang="ko"> <!-- 문서의 언어를 한국어로 지정합니다 -->
+  <head> <!-- 머리 부분(설정·메타·링크)을 묶는 곳입니다 -->
+    <meta charset="UTF-8" /> <!-- 글자가 깨지지 않도록 UTF-8 인코딩을 사용합니다 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 휴대폰에서도 화면이 잘 보이도록 설정합니다 -->
+    <title>DK Engineering — 단일 페이지 사이트</title> <!-- 브라우저 탭에 보이는 제목입니다 -->
+    <link rel="stylesheet" href="css/style.css" /> <!-- 별도 CSS 파일을 불러와 디자인을 적용합니다 -->
+  </head> <!-- 머리 부분의 끝입니다 -->
+  <body> <!-- 실제 화면에 보이는 몸통 부분을 시작합니다 -->
+    <header class="site"> <!-- 페이지의 맨 위에 있는 고정 헤더입니다 -->
+      <div class="wrap"> <!-- 가운데 정렬을 위한 박스입니다 -->
+        <div class="logo">DK Engineering</div> <!-- 회사 로고 글자입니다 -->
+        <nav class="top" id="topNav"></nav> <!-- 상단 메뉴가 들어갈 자리입니다 -->
+      </div> <!-- 가운데 정렬 박스의 끝입니다 -->
+    </header> <!-- 헤더의 끝입니다 -->
+
+    <section class="hero"> <!-- 큰 안내 배너 영역입니다 -->
+      <div class="wrap"> <!-- 배너 안의 내용을 가운데로 모아줍니다 -->
+        <div> <!-- 왼쪽 설명 영역입니다 -->
+          <h1>전기·통신·소방 토탈 솔루션</h1> <!-- 핵심 문구를 크게 보여줍니다 -->
+          <p>설계·시공·감리까지 한 번에 책임지는 파트너입니다.</p> <!-- 간단한 소개 문장입니다 -->
+        </div> <!-- 왼쪽 설명 영역의 끝입니다 -->
+        <div class="hero-card"> <!-- 빠른 이동 버튼을 담는 카드입니다 -->
+          <strong class="quick-title">바로가기</strong> <!-- 카드의 제목입니다 -->
+          <div class="quick-grid"> <!-- 버튼을 격자로 나열하는 상자입니다 -->
+            <button id="goIntro" class="qbtn">회사소개</button> <!-- 회사소개로 이동하는 버튼입니다 -->
+            <button id="goBiz" class="qbtn">사업소개</button> <!-- 사업소개로 이동하는 버튼입니다 -->
+            <button id="goWork" class="qbtn">주요실적</button> <!-- 주요실적으로 이동하는 버튼입니다 -->
+            <button id="goAsk" class="qbtn">견적/문의</button> <!-- 견적/문의로 이동하는 버튼입니다 -->
+          </div> <!-- 격자 상자의 끝입니다 -->
+        </div> <!-- 카드의 끝입니다 -->
+      </div> <!-- 배너 안쪽 박스의 끝입니다 -->
+    </section> <!-- 배너 영역의 끝입니다 -->
+
+    <main> <!-- 본문 영역을 시작합니다 -->
+      <div class="wrap"> <!-- 본문을 가운데로 모읍니다 -->
+        <aside class="side" id="sideNav"> <!-- 왼쪽에 보일 사이드 메뉴 영역입니다 -->
+          <h3>메뉴</h3> <!-- 사이드 메뉴의 제목입니다 -->
+        </aside> <!-- 사이드 영역의 끝입니다 -->
+        <section class="content" id="content"></section> <!-- 오른쪽 실제 내용이 보일 자리입니다 -->
+      </div> <!-- 본문 안쪽 박스의 끝입니다 -->
+    </main> <!-- 본문 영역의 끝입니다 -->
+
+    <footer> <!-- 페이지 맨 아래의 회사 정보입니다 -->
+      <div class="wrap"> <!-- 푸터 내용을 가운데로 정렬합니다 -->
+        <div>© 2025 DK Engineering. All rights reserved.</div> <!-- 저작권 표기입니다 -->
+        <div>서울 금천구 | 대표전화 02-000-0000</div> <!-- 간단한 연락처입니다 -->
+      </div> <!-- 푸터 안쪽 박스의 끝입니다 -->
+    </footer> <!-- 푸터의 끝입니다 -->
+
+    <script type="module" src="js/app.js"></script> <!-- 자바스크립트 모듈을 불러와 기능을 실행합니다 -->
+  </body> <!-- 몸통 부분의 끝입니다 -->
+</html> <!-- 문서의 끝입니다 -->
