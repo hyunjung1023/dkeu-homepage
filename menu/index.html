@@ -1,0 +1,79 @@
+<!DOCTYPE html> <!-- 이 파일은 /menu/에서 SPA로 동작하는 메인입니다 -->
+<html lang="ko"> <!-- 기본 언어는 한국어입니다 -->
+  <head> <!-- 설정 부분 시작입니다 -->
+    <meta charset="UTF-8" /> <!-- 한글 깨짐을 막습니다 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 모바일 대응입니다 -->
+    <title>대광사업단 — 메뉴</title> <!-- 브라우저 탭 제목입니다 -->
+    <link rel="stylesheet" href="css/style.css" /> <!-- /menu/css/style.css 를 불러옵니다 -->
+  </head> <!-- 설정 부분 끝입니다 -->
+
+  <body> <!-- 화면에 보이는 부분 시작입니다 -->
+    <header class="site"> <!-- 상단 고정 헤더입니다 -->
+      <div class="wrap"> <!-- 가운데 정렬 상자입니다 -->
+        <a class="logo" href="/">DK Engineering</a> <!-- 로고입니다. 클릭하면 항상 루트 메인(/)으로 이동합니다 -->
+        <nav class="top" id="topNav"></nav> <!-- 상단 대분류/중분류 메뉴가 자동으로 들어옵니다 -->
+        <div class="actions"> <!-- 오른쪽 CTA와 언어 버튼입니다 -->
+          <a class="btn-ghost" href="#/7-1_ask_estimate">문의하기</a> <!-- 해시 라우팅으로 문의 페이지로 이동합니다 -->
+          <a class="btn-solid" href="#/6-4_data_proposal">브로슈어</a> <!-- 해시 라우팅으로 지명원으로 이동합니다 -->
+          <button class="lang" id="langKR">KR</button> <!-- 한국어 안내 버튼입니다 -->
+          <button class="lang" id="langEN">EN</button> <!-- 영어 안내 버튼입니다 -->
+        </div> <!-- 오른쪽 버튼 영역의 끝입니다 -->
+      </div> <!-- 헤더 안쪽 상자의 끝입니다 -->
+    </header> <!-- 헤더의 끝입니다 -->
+
+    <section class="hero"> <!-- /menu/의 히어로 영역입니다 -->
+      <div class="wrap hero-grid"> <!-- 좌우 2칸 배치 상자입니다 -->
+        <div class="hero-left"> <!-- 왼쪽 소개 영역입니다 -->
+          <div class="eyebrow">WHO WE ARE.</div> <!-- 얇은 영어 소제목입니다 -->
+          <h1 class="hero-title">전기·통신·소방<br />토탈 솔루션 파트너</h1> <!-- 큰 제목입니다 -->
+          <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧은 설명입니다 -->
+          <div class="hero-ctas"> <!-- 히어로 안 버튼 묶음입니다 -->
+            <a class="btn-solid" href="#/3-1_work_electric_eng">주요실적 보기</a> <!-- 해시로 이동합니다 -->
+            <a class="btn-ghost" href="#/7-1_ask_estimate">견적문의</a> <!-- 해시로 이동합니다 -->
+          </div> <!-- 버튼 묶음의 끝입니다 -->
+
+          <ul class="kpis"> <!-- 핵심 숫자 3칸입니다 -->
+            <li><div class="kpi-num" data-count="25">0</div><div class="kpi-label">Years<br />설립 후</div></li> <!-- 25까지 카운트됩니다 -->
+            <li><div class="kpi-num" data-count="630">0</div><div class="kpi-label">명<br />함께하는 직원</div></li> <!-- 630까지 카운트됩니다 -->
+            <li><div class="kpi-num" data-count="905">0</div><div class="kpi-label">억<br />연간 매출(참고)</div></li> <!-- 905까지 카운트됩니다 -->
+          </ul> <!-- 핵심 숫자 끝입니다 -->
+        </div> <!-- 왼쪽 소개 영역의 끝입니다 -->
+
+        <div class="hero-card"> <!-- 오른쪽 바로가기 카드입니다 -->
+          <strong class="quick-title">Business Solutions</strong> <!-- 카드 제목입니다 -->
+          <div class="biz-cards"> <!-- 큰 카드 4개를 2×2로 배치합니다 -->
+            <a class="biz-card" href="#/2-1_biz_electric"><span>전기</span></a> <!-- 해시로 전기 사업 -->
+            <a class="biz-card" href="#/2-2_biz_telecom"><span>통신</span></a> <!-- 해시로 통신 사업 -->
+            <a class="biz-card" href="#/2-3_biz_fire"><span>소방</span></a> <!-- 해시로 소방 사업 -->
+            <a class="biz-card" href="#/2-4_biz_partner"><span>주요파트너</span></a> <!-- 해시로 파트너 -->
+          </div> <!-- 카드 4개 끝입니다 -->
+        </div> <!-- 오른쪽 카드 끝입니다 -->
+      </div> <!-- 히어로 안쪽 상자 끝입니다 -->
+    </section> <!-- 히어로 끝입니다 -->
+
+    <main> <!-- 본문(좌:사이드, 우:내용) 영역입니다 -->
+      <div class="wrap main-grid"> <!-- 2칸 배치 상자입니다 -->
+        <aside class="side" id="sideNav"><h3>메뉴</h3></aside> <!-- 왼쪽 메뉴입니다 -->
+        <section class="content" id="content"></section> <!-- 오른쪽 내용이 바뀌며 보여질 자리입니다 -->
+      </div> <!-- 본문 안쪽 상자 끝입니다 -->
+    </main> <!-- 본문 끝입니다 -->
+
+    <section class="news-strip"> <!-- 하단 공지 간단 리스트입니다 -->
+      <div class="wrap" id="newsStrip"></div> <!-- 자바스크립트로 항목이 들어옵니다 -->
+    </section> <!-- 공지 스트립 끝입니다 -->
+
+    <footer>
+      <div class="wrap footer-grid">
+        <div class="f-brand"><div class="f-title">주식회사 대광사업단</div><div class="f-text">서울특별시 금천구 (예시 주소) · 02-000-0000</div></div> <!-- 회사 정보입니다 -->
+        <div class="f-links">
+          <a href="#/1-3_intro_about">기업개요</a> <!-- 해시 라우팅 링크들입니다 -->
+          <a href="#/6-3_data_certificate">인증서</a>
+          <a href="#/8-1_notice_board">공지사항</a>
+          <a href="#/7-1_ask_estimate">문의하기</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script> <!-- /menu/js/app.js 를 불러옵니다 -->
+  </body> <!-- 화면 부분 끝입니다 -->
+</html> <!-- 문서 끝입니다 -->
