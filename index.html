@@ -1,93 +1,85 @@
 <!DOCTYPE html> <!-- 이 문서가 HTML5 규칙을 따른다는 표시입니다 -->
-<html lang="ko"> <!-- 이 문서의 기본 언어가 한국어라는 뜻입니다 -->
-  <head> <!-- 화면에 직접 보이지 않는 설정 영역의 시작입니다 -->
-    <meta charset="UTF-8" /> <!-- 한글이 깨지지 않도록 UTF-8을 씁니다 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 휴대폰에서도 글씨가 알맞게 보이게 합니다 -->
-    <title>대광사업단 — DK Engineering</title> <!-- 브라우저 탭에 보이는 제목입니다 -->
-    <link rel="stylesheet" href="css/style.css" /> <!-- 디자인 파일을 불러옵니다 -->
+<html lang="ko"> <!-- 문서의 기본 언어가 한국어라는 뜻입니다 -->
+  <head> <!-- 보이지 않는 설정 영역의 시작입니다 -->
+    <meta charset="UTF-8" /> <!-- 한글이 깨지지 않도록 UTF-8 문자 규칙을 씁니다 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 휴대폰에서도 글씨가 잘 보이게 합니다 -->
+    <title>대광사업단 — 메인</title> <!-- 브라우저 탭에 보일 제목입니다 -->
+    <style>
+      :root{ /* 사이트 전역에서 함께 쓰는 값(색/크기)을 정합니다 */
+        --brand:#B22222; /* 메인 포인트색(대광 레드)입니다 */
+        --text:#333333;  /* 기본 글자색입니다 */
+        --muted:#666666; /* 설명 글자색입니다 */
+        --line:#D3D3D3;  /* 구분선 색상입니다 */
+        --radius:14px;   /* 상자 모서리 둥근 정도입니다 */
+        --maxw:1100px;   /* 가운데 정렬 최대 너비입니다 */
+      }
+      html,body{ background:#FFFFFF; color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; } /* 배경을 흰색(#FFFFFF)으로 고정하고 글꼴을 정합니다 */
+      .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:16px 20px; } /* 내용을 가운데로 모아줍니다 */
+      header{ position:sticky; top:0; z-index:10; background:#FFFFFFcc; backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--line); } /* 상단을 반투명 흰색으로 고정합니다 */
+      .nav{ display:flex; align-items:center; gap:12px; } /* 헤더 안의 요소를 가로로 나란히 둡니다 */
+      .logo{ text-decoration:none; color:var(--brand); font-weight:900; } /* 로고 글자를 진하게 보여줍니다 */
+      .nav-right{ margin-left:auto; display:flex; gap:10px; } /* 오른쪽 버튼 영역입니다 */
+      .btn{ text-decoration:none; padding:10px 14px; border-radius:12px; border:1px solid var(--line); }
+      .btn-solid{ background:var(--brand); color:#fff; border-color:var(--brand); }
+      .hero{ background:#fff; } /* 메인도 흰 배경으로 둡니다 */
+      .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:20px; padding:44px 20px; align-items:center; } /* 큰 영역을 좌우로 나눕니다 */
+      .eyebrow{ color:var(--brand); font-weight:900; letter-spacing:.1em; font-size:12px; text-transform:uppercase; } /* 얇은 영어 소제목입니다 */
+      h1{ font-size:40px; line-height:1.15; margin:6px 0 10px; } /* 큰 제목입니다 */
+      p.sub{ color:var(--muted); margin-bottom:14px; } /* 설명 문장입니다 */
+      .ctas{ display:flex; gap:10px; flex-wrap:wrap; } /* 버튼 묶음입니다 */
+      .card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:0 10px 25px rgba(0,0,0,.06); } /* 오른쪽 카드입니다 */
+      .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; } /* 2×2 카드 배치입니다 */
+      .link-card{ display:flex; align-items:center; justify-content:center; height:84px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:#111; font-weight:900; }
+      .link-card:hover{ background:#fafafa; }
+      footer{ border-top:1px solid var(--line); margin-top:32px; }
+      .foot{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:16px 20px; color:#666; font-size:13px; }
+      @media (max-width: 900px){ .hero-grid{ grid-template-columns:1fr; } } /* 화면이 좁으면 한 줄로 쌓습니다 */
+    </style> <!-- 메인 전용 간단 스타일을 안에 적었습니다(파일 추가 불필요) -->
   </head> <!-- 설정 영역의 끝입니다 -->
 
-  <body> <!-- 실제로 화면에 보이는 부분의 시작입니다 -->
-    <header class="site"> <!-- 페이지 맨 위에 고정되는 헤더입니다 -->
-      <div class="wrap"> <!-- 내용을 가운데로 모아주는 상자입니다 -->
-        <div class="logo">대광사업단</div> <!-- 로고 글자입니다 -->
-        <nav class="top" id="topNav"></nav> <!-- 상단 네비게이션이 자동으로 들어옵니다 -->
-        <div class="actions"> <!-- 헤더 오른쪽의 빠른 버튼 모음입니다 -->
-          <a class="btn-ghost" href="#/7-1_ask_estimate">문의하기</a> <!-- 견적/문의로 이동하는 버튼입니다 -->
-          <a class="btn-solid" href="#/6-4_data_proposal">브로슈어</a> <!-- 지명원/브로슈어로 이동하는 버튼입니다 -->
-          <button class="lang" id="langKR">KR</button> <!-- 한국어 버튼입니다 -->
-          <button class="lang" id="langEN">EN</button> <!-- 영어 버튼입니다 -->
-        </div> <!-- 빠른 버튼 모음의 끝입니다 -->
-      </div> <!-- 헤더 안쪽 상자의 끝입니다 -->
+  <body> <!-- 화면에 보이는 영역의 시작입니다 -->
+    <header> <!-- 페이지 맨 위에 항상 보이는 영역입니다 -->
+      <div class="wrap nav"> <!-- 헤더 안쪽을 가운데로 모읍니다 -->
+        <a class="logo" href="/">DK Engineering</a> <!-- 로고입니다. 클릭하면 항상 메인(/)으로 옵니다 -->
+        <div class="nav-right"> <!-- 오른쪽 빠른 링크입니다 -->
+          <a class="btn" href="/menu/#/8-1_notice_board">공지</a> <!-- 공지로 바로 갑니다(해시 라우팅) -->
+          <a class="btn" href="/menu/#/7-1_ask_estimate">문의</a> <!-- 문의로 바로 갑니다 -->
+          <a class="btn-solid" href="/menu/">메뉴로 가기</a> <!-- 메뉴 허브(/menu/)로 들어갑니다 -->
+        </div> <!-- 오른쪽 링크의 끝입니다 -->
+      </div> <!-- 헤더 안쪽의 끝입니다 -->
     </header> <!-- 헤더의 끝입니다 -->
 
-    <section class="hero"> <!-- 첫 화면(히어로) 영역입니다 -->
-      <div class="wrap hero-grid"> <!-- 히어로를 좌우 2칸으로 배치하는 상자입니다 -->
-        <div class="hero-left"> <!-- 왼쪽 설명 칸입니다 -->
-          <div class="eyebrow">공공기관이 선택한 기술력과 신뢰</div> <!-- HPS 스타일의 얇은 소제목입니다 -->
-          <h1 class="hero-title">전기·통신·소방<br />토탈 솔루션 파트너</h1> <!-- 큰 제목입니다 -->
-          <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧은 설명입니다 -->
-          <div class="hero-ctas"> <!-- 히어로 안의 버튼 묶음입니다 -->
-            <a class="btn-solid" href="#/3-1_work_electric_eng">주요실적 보기</a> <!-- 주요실적으로 이동합니다 -->
-            <a class="btn-ghost" href="#/7-1_ask_estimate">견적문의</a> <!-- 견적/문의로 이동합니다 -->
+    <section class="hero"> <!-- 첫 화면의 큰 소개 영역입니다 -->
+      <div class="wrap hero-grid"> <!-- 내용을 좌우로 나눠 담는 상자입니다 -->
+        <div> <!-- 왼쪽 설명 칸입니다 -->
+          <div class="eyebrow">WHO WE ARE.</div> <!-- HPS처럼 얇은 영어 소제목입니다 -->
+          <h1>전기·통신·소방 토탈 솔루션 파트너</h1> <!-- 가장 크게 보이는 문장입니다 -->
+          <p class="sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧고 선명한 설명 문장입니다 -->
+          <div class="ctas"> <!-- 중요한 이동 버튼들입니다 -->
+            <a class="btn-solid" href="/menu/#/3-1_work_electric_eng">주요실적 보기</a> <!-- 실적으로 이동합니다 -->
+            <a class="btn" href="/menu/#/2-1_biz_electric">사업소개</a> <!-- 사업소개로 이동합니다 -->
+            <a class="btn" href="/menu/#/7-1_ask_estimate">견적문의</a> <!-- 견적문의로 이동합니다 -->
           </div> <!-- 버튼 묶음의 끝입니다 -->
-
-          <ul class="kpis"> <!-- 핵심 지표 숫자를 보여주는 상자입니다 -->
-            <li> <!-- 첫 번째 숫자 칸입니다 -->
-              <div class="kpi-num" data-count="10">0</div> <!-- 25까지 숫자가 올라갑니다 -->
-              <div class="kpi-label">Years<br />설립 후</div> <!-- 숫자에 대한 설명입니다 -->
-            </li>
-            <li> <!-- 두 번째 숫자 칸입니다 -->
-              <div class="kpi-num" data-count="20">0</div> <!-- 630까지 숫자가 올라갑니다 -->
-              <div class="kpi-label">개<br />함께하는 서울의 자치구</div> <!-- 숫자에 대한 설명입니다 -->
-            </li>
-            <li> <!-- 세 번째 숫자 칸입니다 -->
-              <div class="kpi-num" data-count="300">0</div> <!-- 905까지 숫자가 올라갑니다 -->
-              <div class="kpi-label">개<br />프로젝트</div> <!-- 숫자에 대한 설명입니다 -->
-            </li>
-          </ul> <!-- 핵심 지표 상자의 끝입니다 -->
         </div> <!-- 왼쪽 설명 칸의 끝입니다 -->
 
-        <div class="hero-card"> <!-- 오른쪽 박스(사업영역 바로가기 카드)입니다 -->
-          <strong class="quick-title">Business Solutions</strong> <!-- 카드의 제목입니다 -->
-          <div class="biz-cards"> <!-- 4개의 큰 카드 버튼을 담는 곳입니다 -->
-            <a class="biz-card" href="#/2-1_biz_electric"><span>전기</span></a> <!-- 전기 사업으로 이동합니다 -->
-            <a class="biz-card" href="#/2-2_biz_telecom"><span>통신</span></a> <!-- 통신 사업으로 이동합니다 -->
-            <a class="biz-card" href="#/2-3_biz_fire"><span>소방</span></a> <!-- 소방 사업으로 이동합니다 -->
-            <a class="biz-card" href="#/2-4_biz_partner"><span>주요파트너</span></a> <!-- 주요 파트너 소개로 이동합니다 -->
-          </div> <!-- 카드 묶음의 끝입니다 -->
-        </div> <!-- 오른쪽 박스의 끝입니다 -->
+        <div class="card"> <!-- 오른쪽 바로가기 카드 상자입니다 -->
+          <strong style="display:block;margin-bottom:8px;">Business Solutions</strong> <!-- 카드 제목입니다 -->
+          <div class="grid"> <!-- 4개의 큰 버튼을 2×2로 배치합니다 -->
+            <a class="link-card" href="/menu/#/2-1_biz_electric">전기</a> <!-- 전기 사업으로 이동합니다 -->
+            <a class="link-card" href="/menu/#/2-2_biz_telecom">통신</a> <!-- 통신 사업으로 이동합니다 -->
+            <a class="link-card" href="/menu/#/2-3_biz_fire">소방</a> <!-- 소방 사업으로 이동합니다 -->
+            <a class="link-card" href="/menu/#/2-4_biz_partner">주요파트너</a> <!-- 파트너 소개로 이동합니다 -->
+          </div> <!-- 2×2 배치의 끝입니다 -->
+        </div> <!-- 오른쪽 카드 상자의 끝입니다 -->
       </div> <!-- 히어로 안쪽 상자의 끝입니다 -->
     </section> <!-- 히어로 영역의 끝입니다 -->
 
-    <main> <!-- 본문(좌:사이드, 우:내용) 영역입니다 -->
-      <div class="wrap main-grid"> <!-- 본문을 2칸으로 배치하는 상자입니다 -->
-        <aside class="side" id="sideNav"> <!-- 왼쪽 사이드 메뉴가 들어갑니다 -->
-          <h3>메뉴</h3> <!-- 사이드 메뉴의 제목입니다 -->
-        </aside> <!-- 왼쪽 메뉴의 끝입니다 -->
-        <section class="content" id="content"></section> <!-- 오른쪽 실제 내용이 들어갑니다 -->
-      </div> <!-- 본문 안쪽 상자의 끝입니다 -->
-    </main> <!-- 본문 영역의 끝입니다 -->
-
-    <section class="news-strip"> <!-- 하단 뉴스/공지 간단 리스트입니다 -->
-      <div class="wrap" id="newsStrip"><!-- 공지 항목이 자바스크립트로 자동 삽입됩니다 --></div> <!-- 리스트 상자입니다 -->
-    </section> <!-- 뉴스 스트립의 끝입니다 -->
-
     <footer> <!-- 맨 아래 회사 정보입니다 -->
-      <div class="wrap footer-grid"> <!-- 푸터 안의 배치 상자입니다 -->
-        <div class="f-brand"> <!-- 회사 이름/주소 구역입니다 -->
-          <div class="f-title">주식회사 대광사업단</div> <!-- 회사명입니다 -->
-          <div class="f-text">서울특별시 금천구 (예시 주소) · 대표 02-000-0000</div> <!-- 간단한 주소/연락처입니다 -->
-        </div> <!-- 회사 정보 구역의 끝입니다 -->
-        <div class="f-links"> <!-- 빠른 링크 모음입니다 -->
-          <a href="#/1-3_intro_about">기업개요</a> <!-- 기업개요로 이동합니다 -->
-          <a href="#/6-3_data_certificate">인증서</a> <!-- 인증서로 이동합니다 -->
-          <a href="#/8-1_notice_board">공지사항</a> <!-- 공지사항으로 이동합니다 -->
-          <a href="#/7-1_ask_estimate">문의하기</a> <!-- 문의로 이동합니다 -->
-        </div> <!-- 빠른 링크 모음의 끝입니다 -->
-      </div> <!-- 푸터 안쪽 상자의 끝입니다 -->
+      <div class="wrap foot"> <!-- 푸터 내용을 가운데로 모읍니다 -->
+        <div>© 2025 DK Engineering</div> <!-- 저작권 표시입니다 -->
+        <div>서울특별시 금천구 · 02-000-0000</div> <!-- 간단한 주소/연락처입니다 -->
+      </div> <!-- 푸터 안쪽의 끝입니다 -->
     </footer> <!-- 푸터의 끝입니다 -->
-
-    <script type="module" src="js/app.js"></script> <!-- 기능을 실행하는 자바스크립트를 불러옵니다 -->
-  </body> <!-- 화면 부분의 끝입니다 -->
+  </body> <!-- 화면 영역의 끝입니다 -->
 </html> <!-- 문서의 끝입니다 -->
+
