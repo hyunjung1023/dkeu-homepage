@@ -6,21 +6,26 @@
     <title>대광사업단 — 메인</title> <!-- 브라우저 탭에 보일 제목입니다 -->
     <style>
       :root{ /* 사이트 전역에서 함께 쓰는 값(색/크기)을 정합니다 */
-        --brand:#B22222; /* 메인 포인트색(대광 레드)입니다 */
-        --text:#333333;  /* 기본 글자색입니다 */
-        --muted:#666666; /* 설명 글자색입니다 */
-        --line:#D3D3D3;  /* 구분선 색상입니다 */
-        --radius:14px;   /* 상자 모서리 둥근 정도입니다 */
-        --maxw:1100px;   /* 가운데 정렬 최대 너비입니다 */
-      }
+        --brand:#B22222;  /* 메인 포인트색(대광 레드)입니다 */
+        --text:#333333;   /* 기본 글자색입니다 */
+        --muted:#666666;  /* 설명 글자색입니다 */
+        --line:#D3D3D3;   /* 구분선 색상입니다 */
+        --radius:14px;    /* 상자 모서리 둥근 정도입니다 */
+        --maxw:1100px;    /* 가운데 정렬 최대 너비입니다 */
+        --speed:260ms;    /* 전환(슬라이드/페이드) 속도입니다 */  /* ← 누락되었던 주석 닫음 */
+      } /* ← 여기까지가 :root 블록입니다 */
+
       html,body{ background:#FFFFFF; color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; } /* 배경을 흰색(#FFFFFF)으로 고정하고 글꼴을 정합니다 */
       .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:16px 20px; } /* 내용을 가운데로 모아줍니다 */
+
+      /* (이전 상단 스타일 — 아래 'header.site' 블록이 최종적으로 덮어씁니다) */
       header{ position:sticky; top:0; z-index:10; background:#FFFFFFcc; backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--line); } /* 상단을 반투명 흰색으로 고정합니다 */
-      .nav{ display:flex; align-items:center; gap:12px; } /* 헤더 안의 요소를 가로로 나란히 둡니다 */
+      .nav{ display:flex; align-items:center; gap:12px; } /* (이전 구조용) */
       .logo{ text-decoration:none; color:var(--brand); font-weight:900; } /* 로고 글자를 진하게 보여줍니다 */
-      .nav-right{ margin-left:auto; display:flex; gap:10px; } /* 오른쪽 버튼 영역입니다 */
+      .nav-right{ margin-left:auto; display:flex; gap:10px; } /* (이전 구조용) */
       .btn{ text-decoration:none; padding:10px 14px; border-radius:12px; border:1px solid var(--line); }
       .btn-solid{ background:var(--brand); color:#fff; border-color:var(--brand); }
+
       .hero{ background:#fff; } /* 메인도 흰 배경으로 둡니다 */
       .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:20px; padding:44px 20px; align-items:center; } /* 큰 영역을 좌우로 나눕니다 */
       .eyebrow{ color:var(--brand); font-weight:900; letter-spacing:.1em; font-size:12px; text-transform:uppercase; } /* 얇은 영어 소제목입니다 */
@@ -34,7 +39,62 @@
       footer{ border-top:1px solid var(--line); margin-top:32px; }
       .foot{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:16px 20px; color:#666; font-size:13px; }
       @media (max-width: 900px){ .hero-grid{ grid-template-columns:1fr; } } /* 화면이 좁으면 한 줄로 쌓습니다 */
-    </style> <!-- 메인 전용 간단 스타일을 안에 적었습니다(파일 추가 불필요) -->
+
+      /* ======================= 여기부터: HPS형 '흰색 헤더 + 슬라이드 드롭다운' 덮어쓰기 ======================= */
+      header.site{ /* 상단 고정 헤더의 최종 모양입니다(흰색, 얇은 선) */
+        position:sticky; top:0; z-index:50;
+        background:#FFFFFF; color:var(--text);
+        border-bottom:1px solid var(--line);
+        box-shadow:none;
+      }
+      nav.top{ /* 대분류 버튼줄(오른쪽 정렬) */
+        display:flex; gap:10px; align-items:center; margin-left:auto;
+      }
+      .menu-btn{ /* 대분류 버튼 */
+        position:relative; border:none; background:transparent; color:var(--text);
+        padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:700;
+        transition:background var(--speed), transform var(--speed);
+      }
+      .menu-btn:hover{ background:#00000008; transform:translateY(-1px); }
+
+      /* 슬라이드 다운 드롭다운 */
+      nav.top .menu-btn .dropdown{
+        position:absolute; left:0; top:calc(100% + 6px);
+        min-width:220px; background:#fff; color:var(--text);
+        border:1px solid var(--line); border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,.08);
+        padding:8px;
+        opacity:0; transform:translateY(8px); visibility:hidden; pointer-events:none; max-height:0; overflow:hidden;
+        transition:
+          opacity var(--speed) ease,
+          transform var(--speed) ease,
+          max-height var(--speed) ease,
+          visibility 0s linear var(--speed);
+      }
+      nav.top .menu-btn:hover .dropdown,
+      nav.top .menu-btn:focus-within .dropdown{
+        opacity:1; transform:translateY(0); visibility:visible; pointer-events:auto; max-height:600px;
+        transition:
+          opacity var(--speed) ease,
+          transform var(--speed) ease,
+          max-height var(--speed) ease,
+          visibility 0s;
+      }
+      nav.top .dropdown a{
+        display:block; text-decoration:none; color:var(--text);
+        padding:10px 12px; border-radius:10px; font-size:14px;
+        transition:background var(--speed), padding var(--speed);
+      }
+      nav.top .dropdown a:hover{ background:#fafafa; padding-left:16px; }
+
+      /* 헤더 오른쪽 버튼(메인/메뉴 공통) */
+      .actions{ display:flex; gap:10px; align-items:center; margin-left:10px; }
+      .btn-ghost{ border:1px solid #00000020; color:var(--text); padding:8px 12px; border-radius:10px; text-decoration:none; }
+      .btn-ghost:hover{ background:#00000008; }
+      .btn-solid{ background:var(--brand); color:#fff; padding:8px 12px; border-radius:10px; text-decoration:none; font-weight:800; }
+      .lang{ border:none; background:transparent; color:var(--text); padding:6px 8px; border-radius:8px; cursor:pointer; font-weight:800; }
+      .lang:hover{ background:#00000008; }
+      /* ======================= 덮어쓰기 끝 ======================= */
+    </style> <!-- 메인 전용 스타일 끝(동일 <style> 안 맨 아래에 드롭다운 CSS 추가) -->
   </head> <!-- 설정 영역의 끝입니다 -->
 
   <body> <!-- 화면에 보이는 영역의 시작입니다 -->
@@ -50,7 +110,6 @@
         </div> <!-- 버튼 묶음 끝 -->
       </div> <!-- 가운데 상자 끝 -->
     </header> <!-- 헤더 끝 -->
-
 
     <section class="hero"> <!-- 첫 화면의 큰 소개 영역입니다 -->
       <div class="wrap hero-grid"> <!-- 내용을 좌우로 나눠 담는 상자입니다 -->
@@ -83,6 +142,52 @@
         <div>서울특별시 금천구 · 02-000-0000</div> <!-- 간단한 주소/연락처입니다 -->
       </div> <!-- 푸터 안쪽의 끝입니다 -->
     </footer> <!-- 푸터의 끝입니다 -->
+
+    <!-- 상단 드롭다운을 그리는 스크립트(메인) -->
+    <script type="module">
+      import { SITE_MAP } from '/menu/js/data/site_map.js'; // /menu의 메뉴 데이터를 그대로 가져옵니다
+
+      // 선택자를 받아 요소 하나를 찾는 간단한 도우미입니다
+      const $ = (sel) => document.querySelector(sel);
+
+      // 루트 메인에서 쓸 상단 드롭다운을 그려주는 함수입니다
+      function buildTopNavRoot(){ /* 메인페이지 상단 메뉴를 만듭니다 */
+        const nav = $('#topNav'); /* 상단 네비게이션 상자를 찾습니다 */
+        nav.innerHTML = ''; /* 혹시 이전 내용이 있으면 지웁니다 */
+
+        SITE_MAP.forEach(group => { /* 대분류를 하나씩 꺼냅니다 */
+          const btn = document.createElement('button'); /* 버튼을 만듭니다 */
+          btn.className = 'menu-btn'; /* 버튼에 스타일을 붙입니다 */
+          btn.textContent = group.title; /* 버튼 글자를 대분류 이름으로 합니다 */
+
+          const dd = document.createElement('div'); /* 드롭다운 상자를 만듭니다 */
+          dd.className = 'dropdown'; /* 드롭다운 모양을 적용합니다 */
+
+          group.items.forEach(it => { /* 중분류들을 하나씩 처리합니다 */
+            const a = document.createElement('a'); /* 링크를 만듭니다 */
+            a.href = `/menu/#/${it.code}`; /* /menu로 가서 해시 라우팅으로 열리게 합니다 */
+            a.textContent = it.title; /* 링크에 항목 이름을 적습니다 */
+            dd.appendChild(a); /* 드롭다운 안에 넣습니다 */
+          });
+
+          btn.appendChild(dd); /* 버튼 아래에 드롭다운을 붙입니다 */
+          nav.appendChild(btn); /* 상단 네비게이션에 버튼을 추가합니다 */
+        });
+      }
+
+      // 언어 버튼은 간단 안내만 띄우도록 합니다
+      function wireLangButtons(){ /* KR/EN 안내입니다 */
+        const kr = document.getElementById('langKR');
+        const en = document.getElementById('langEN');
+        if(kr) kr.onclick = ()=>alert('한국어가 기본입니다.');
+        if(en) en.onclick = ()=>alert('English version is under preparation.');
+      }
+
+      // 문서가 준비되면 상단 메뉴를 그리고 버튼을 연결합니다
+      window.addEventListener('DOMContentLoaded', () => {
+        buildTopNavRoot(); /* 드롭다운 메뉴를 그립니다 */
+        wireLangButtons(); /* 언어 안내 버튼을 연결합니다 */
+      });
+    </script>
   </body> <!-- 화면 영역의 끝입니다 -->
 </html> <!-- 문서의 끝입니다 -->
-
