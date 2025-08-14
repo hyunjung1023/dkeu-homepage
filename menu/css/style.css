@@ -92,6 +92,24 @@ footer{background:#f5f5f5;margin-top:40px;border-top:1px solid var(--line)} /* �
   nav.top{display:none} /* 상단 대분류 메뉴는 모바일에서 숨깁니다 */
 }
 
+/* === 로고 문구/색/밑줄 통일 오버라이드 (메인 + /menu 공통) === */
+.logo{ /* 헤더의 왼쪽 로고 앵커입니다 */
+  color:#B22222;           /* 요청하신 대광 레드(#B22222)로 고정합니다 */
+  text-decoration:none;    /* 밑줄을 없앱니다 */
+  font-weight:900;         /* 굵게 보이도록 합니다 */
+}
+.logo:visited{ /* 방문한 링크여도 색이 바뀌지 않게 합니다 */
+  color:#B22222;           /* 보라색으로 변하지 않도록 동일 색상 고정 */
+  text-decoration:none;    /* 밑줄이 생기지 않게 합니다 */
+}
+.logo:hover,
+.logo:focus{               /* 마우스를 올리거나 키보드 포커스가 왔을 때 */
+  color:#B22222;           /* 색 유지 */
+  text-decoration:none;    /* 밑줄 유지 제거 */
+  opacity:.95;             /* 살짝만 강조 효과 */
+}
+
+
 /* ================= 공통 헤더(흰색)로 덮어쓰기 ================= */
 /* 아래 규칙은 파일 위쪽의 같은 이름 규칙을 '덮어써서' 흰색 헤더로 만듭니다 */
 header.site{ /* 페이지 맨 위의 고정 헤더입니다 */
