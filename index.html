@@ -4,100 +4,32 @@
     <meta charset="UTF-8" /> <!-- 한글이 깨지지 않도록 UTF-8 문자 규칙을 씁니다 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 휴대폰에서도 글씨가 잘 보이게 합니다 -->
     <title>대광사업단 — 메인</title> <!-- 브라우저 탭에 보일 제목입니다 -->
+
+    <!-- 핵심 포인트: /menu에서 쓰는 공용 스타일을 그대로 불러옵니다(헤더/드롭다운/버튼 동일화) -->
+    <link rel="stylesheet" href="/menu/css/style.css" /> <!-- /menu와 완전히 같은 상단 모양을 보장합니다 -->
+
     <style>
-      :root{ /* 사이트 전역에서 함께 쓰는 값(색/크기)을 정합니다 */
-        --brand:#B22222;  /* 메인 포인트색(대광 레드)입니다 */
-        --text:#333333;   /* 기본 글자색입니다 */
-        --muted:#666666;  /* 설명 글자색입니다 */
-        --line:#D3D3D3;   /* 구분선 색상입니다 */
-        --radius:14px;    /* 상자 모서리 둥근 정도입니다 */
-        --maxw:1100px;    /* 가운데 정렬 최대 너비입니다 */
-        --speed:260ms;    /* 전환(슬라이드/페이드) 속도입니다 */  /* ← 누락되었던 주석 닫음 */
-      } /* ← 여기까지가 :root 블록입니다 */
+      /* 아래 스타일은 '메인 전용' 섹션(히어로/카드)만 살짝 손보는 보조 스타일입니다 */
+      /* 상단 헤더(UI)는 /menu/css/style.css가 100% 책임지므로 여기서 건드리지 않습니다 */
 
-      html,body{ background:#FFFFFF; color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; } /* 배경을 흰색(#FFFFFF)으로 고정하고 글꼴을 정합니다 */
-      .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:16px 20px; } /* 내용을 가운데로 모아줍니다 */
+      /* 메인 히어로는 /menu의 클래스 체계를 그대로 사용합니다 */
+      .hero { /* 첫 화면의 큰 영역입니다 */
+        background: var(--bg); /* 배경을 사이트 기본(#FFFFFF)로 유지합니다 */
+      }
+      .hero .wrap { /* 가운데 정렬과 좌우 여백을 유지합니다 */
+        padding: 44px 20px; /* 시각적 여백을 줍니다 */
+      }
+      /* 루트 메인에서도 /menu와 동일한 클래스 네이밍을 사용해 일관성을 맞춥니다 */
+      .hero-title { font-size: 38px; line-height: 1.22; } /* 큰 제목 크기를 /menu와 맞춥니다 */
+      .hero-sub { margin-top: 10px; } /* 작은 설명의 위 여백입니다 */
 
-      /* (이전 상단 스타일 — 아래 'header.site' 블록이 최종적으로 덮어씁니다) */
-      header{ position:sticky; top:0; z-index:10; background:#FFFFFFcc; backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--line); } /* 상단을 반투명 흰색으로 고정합니다 */
-      .nav{ display:flex; align-items:center; gap:12px; } /* (이전 구조용) */
-      .logo{ text-decoration:none; color:var(--brand); font-weight:900; } /* 로고 글자를 진하게 보여줍니다 */
-      .nav-right{ margin-left:auto; display:flex; gap:10px; } /* (이전 구조용) */
-      .btn{ text-decoration:none; padding:10px 14px; border-radius:12px; border:1px solid var(--line); }
-      .btn-solid{ background:var(--brand); color:#fff; border-color:var(--brand); }
-
-      .hero{ background:#fff; } /* 메인도 흰 배경으로 둡니다 */
-      .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:20px; padding:44px 20px; align-items:center; } /* 큰 영역을 좌우로 나눕니다 */
-      .eyebrow{ color:var(--brand); font-weight:900; letter-spacing:.1em; font-size:12px; text-transform:uppercase; } /* 얇은 영어 소제목입니다 */
-      h1{ font-size:40px; line-height:1.15; margin:6px 0 10px; } /* 큰 제목입니다 */
-      p.sub{ color:var(--muted); margin-bottom:14px; } /* 설명 문장입니다 */
-      .ctas{ display:flex; gap:10px; flex-wrap:wrap; } /* 버튼 묶음입니다 */
-      .card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:0 10px 25px rgba(0,0,0,.06); } /* 오른쪽 카드입니다 */
-      .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; } /* 2×2 카드 배치입니다 */
-      .link-card{ display:flex; align-items:center; justify-content:center; height:84px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:#111; font-weight:900; }
-      .link-card:hover{ background:#fafafa; }
-      footer{ border-top:1px solid var(--line); margin-top:32px; }
-      .foot{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:16px 20px; color:#666; font-size:13px; }
-      @media (max-width: 900px){ .hero-grid{ grid-template-columns:1fr; } } /* 화면이 좁으면 한 줄로 쌓습니다 */
-
-      /* ======================= 여기부터: HPS형 '흰색 헤더 + 슬라이드 드롭다운' 덮어쓰기 ======================= */
-      header.site{ /* 상단 고정 헤더의 최종 모양입니다(흰색, 얇은 선) */
-        position:sticky; top:0; z-index:50;
-        background:#FFFFFF; color:var(--text);
-        border-bottom:1px solid var(--line);
-        box-shadow:none;
-      }
-      nav.top{ /* 대분류 버튼줄(오른쪽 정렬) */
-        display:flex; gap:10px; align-items:center; margin-left:auto;
-      }
-      .menu-btn{ /* 대분류 버튼 */
-        position:relative; border:none; background:transparent; color:var(--text);
-        padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:700;
-        transition:background var(--speed), transform var(--speed);
-      }
-      .menu-btn:hover{ background:#00000008; transform:translateY(-1px); }
-
-      /* 슬라이드 다운 드롭다운 */
-      nav.top .menu-btn .dropdown{
-        position:absolute; left:0; top:calc(100% + 6px);
-        min-width:220px; background:#fff; color:var(--text);
-        border:1px solid var(--line); border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,.08);
-        padding:8px;
-        opacity:0; transform:translateY(8px); visibility:hidden; pointer-events:none; max-height:0; overflow:hidden;
-        transition:
-          opacity var(--speed) ease,
-          transform var(--speed) ease,
-          max-height var(--speed) ease,
-          visibility 0s linear var(--speed);
-      }
-      nav.top .menu-btn:hover .dropdown,
-      nav.top .menu-btn:focus-within .dropdown{
-        opacity:1; transform:translateY(0); visibility:visible; pointer-events:auto; max-height:600px;
-        transition:
-          opacity var(--speed) ease,
-          transform var(--speed) ease,
-          max-height var(--speed) ease,
-          visibility 0s;
-      }
-      nav.top .dropdown a{
-        display:block; text-decoration:none; color:var(--text);
-        padding:10px 12px; border-radius:10px; font-size:14px;
-        transition:background var(--speed), padding var(--speed);
-      }
-      nav.top .dropdown a:hover{ background:#fafafa; padding-left:16px; }
-
-      /* 헤더 오른쪽 버튼(메인/메뉴 공통) */
-      .actions{ display:flex; gap:10px; align-items:center; margin-left:10px; }
-      .btn-ghost{ border:1px solid #00000020; color:var(--text); padding:8px 12px; border-radius:10px; text-decoration:none; }
-      .btn-ghost:hover{ background:#00000008; }
-      .btn-solid{ background:var(--brand); color:#fff; padding:8px 12px; border-radius:10px; text-decoration:none; font-weight:800; }
-      .lang{ border:none; background:transparent; color:var(--text); padding:6px 8px; border-radius:8px; cursor:pointer; font-weight:800; }
-      .lang:hover{ background:#00000008; }
-      /* ======================= 덮어쓰기 끝 ======================= */
-    </style> <!-- 메인 전용 스타일 끝(동일 <style> 안 맨 아래에 드롭다운 CSS 추가) -->
+      /* 메인에서 오른쪽 카드 영역은 /menu의 hero-card, biz-cards, biz-card를 그대로 씁니다 */
+      /* 별도 추가 스타일 없이 /menu/css/style.css 규칙만으로 동일하게 표시됩니다 */
+    </style> <!-- 메인 전용 보조 스타일 끝 -->
   </head> <!-- 설정 영역의 끝입니다 -->
 
   <body> <!-- 화면에 보이는 영역의 시작입니다 -->
+    <!-- 헤더: /menu와 완전히 동일한 마크업 구조를 그대로 사용합니다 -->
     <header class="site"> <!-- 상단 고정 헤더입니다 -->
       <div class="wrap"> <!-- 내용을 가운데로 모읍니다 -->
         <a class="logo" href="/">DK Engineering</a> <!-- 로고입니다. 클릭하면 항상 메인(/)으로 옵니다 -->
@@ -111,82 +43,87 @@
       </div> <!-- 가운데 상자 끝 -->
     </header> <!-- 헤더 끝 -->
 
+    <!-- 메인 히어로: /menu와 동일 클래스(eyebrow/hero-title/hero-sub/hero-ctas/hero-card/biz-cards/biz-card) 사용 -->
     <section class="hero"> <!-- 첫 화면의 큰 소개 영역입니다 -->
       <div class="wrap hero-grid"> <!-- 내용을 좌우로 나눠 담는 상자입니다 -->
-        <div> <!-- 왼쪽 설명 칸입니다 -->
+        <div class="hero-left"> <!-- 왼쪽 설명 칸입니다 -->
           <div class="eyebrow">WHO WE ARE.</div> <!-- HPS처럼 얇은 영어 소제목입니다 -->
-          <h1>전기·통신·소방 토탈 솔루션 파트너</h1> <!-- 가장 크게 보이는 문장입니다 -->
-          <p class="sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧고 선명한 설명 문장입니다 -->
-          <div class="ctas"> <!-- 중요한 이동 버튼들입니다 -->
+          <h1 class="hero-title">전기·통신·소방<br />토탈 솔루션 파트너</h1> <!-- 가장 크게 보이는 문장입니다 -->
+          <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧고 선명한 설명 문장입니다 -->
+          <div class="hero-ctas"> <!-- 중요한 이동 버튼들입니다 -->
             <a class="btn-solid" href="/menu/#/3-1_work_electric_eng">주요실적 보기</a> <!-- 실적으로 이동합니다 -->
-            <a class="btn" href="/menu/#/2-1_biz_electric">사업소개</a> <!-- 사업소개로 이동합니다 -->
-            <a class="btn" href="/menu/#/7-1_ask_estimate">견적문의</a> <!-- 견적문의로 이동합니다 -->
+            <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">견적문의</a> <!-- 견적문의로 이동합니다 -->
           </div> <!-- 버튼 묶음의 끝입니다 -->
         </div> <!-- 왼쪽 설명 칸의 끝입니다 -->
 
-        <div class="card"> <!-- 오른쪽 바로가기 카드 상자입니다 -->
-          <strong style="display:block;margin-bottom:8px;">Business Solutions</strong> <!-- 카드 제목입니다 -->
-          <div class="grid"> <!-- 4개의 큰 버튼을 2×2로 배치합니다 -->
-            <a class="link-card" href="/menu/#/2-1_biz_electric">전기</a> <!-- 전기 사업으로 이동합니다 -->
-            <a class="link-card" href="/menu/#/2-2_biz_telecom">통신</a> <!-- 통신 사업으로 이동합니다 -->
-            <a class="link-card" href="/menu/#/2-3_biz_fire">소방</a> <!-- 소방 사업으로 이동합니다 -->
-            <a class="link-card" href="/menu/#/2-4_biz_partner">주요파트너</a> <!-- 파트너 소개로 이동합니다 -->
+        <div class="hero-card"> <!-- 오른쪽 바로가기 카드 상자입니다 -->
+          <strong class="quick-title">Business Solutions</strong> <!-- 카드 제목입니다 -->
+          <div class="biz-cards"> <!-- 4개의 큰 버튼을 2×2로 배치합니다 -->
+            <a class="biz-card" href="/menu/#/2-1_biz_electric"><span>전기</span></a> <!-- 전기 사업으로 이동합니다 -->
+            <a class="biz-card" href="/menu/#/2-2_biz_telecom"><span>통신</span></a> <!-- 통신 사업으로 이동합니다 -->
+            <a class="biz-card" href="/menu/#/2-3_biz_fire"><span>소방</span></a> <!-- 소방 사업으로 이동합니다 -->
+            <a class="biz-card" href="/menu/#/2-4_biz_partner"><span>주요파트너</span></a> <!-- 파트너 소개로 이동합니다 -->
           </div> <!-- 2×2 배치의 끝입니다 -->
         </div> <!-- 오른쪽 카드 상자의 끝입니다 -->
       </div> <!-- 히어로 안쪽 상자의 끝입니다 -->
     </section> <!-- 히어로 영역의 끝입니다 -->
 
+    <!-- 푸터: /menu와 동일한 구조를 쓰면 하단도 통일됩니다(선택) -->
     <footer> <!-- 맨 아래 회사 정보입니다 -->
-      <div class="wrap foot"> <!-- 푸터 내용을 가운데로 모읍니다 -->
-        <div>© 2025 DK Engineering</div> <!-- 저작권 표시입니다 -->
-        <div>서울특별시 금천구 · 02-000-0000</div> <!-- 간단한 주소/연락처입니다 -->
-      </div> <!-- 푸터 안쪽의 끝입니다 -->
+      <div class="wrap footer-grid"> <!-- 푸터 안쪽 배치입니다 -->
+        <div class="f-brand"> <!-- 회사 이름/주소 구역입니다 -->
+          <div class="f-title">주식회사 대광사업단</div> <!-- 회사명입니다 -->
+          <div class="f-text">서울특별시 금천구 (예시 주소) · 02-000-0000</div> <!-- 간단한 주소/연락처입니다 -->
+        </div> <!-- 회사 정보 구역의 끝입니다 -->
+        <div class="f-links"> <!-- 빠른 링크 모음입니다 -->
+          <a href="/menu/#/1-3_intro_about">기업개요</a> <!-- /menu 해시 라우팅 -->
+          <a href="/menu/#/6-3_data_certificate">인증서</a>
+          <a href="/menu/#/8-1_notice_board">공지사항</a>
+          <a href="/menu/#/7-1_ask_estimate">문의하기</a>
+        </div> <!-- 빠른 링크 모음의 끝입니다 -->
+      </div> <!-- 푸터 안쪽 상자의 끝입니다 -->
     </footer> <!-- 푸터의 끝입니다 -->
 
     <!-- 상단 드롭다운을 그리는 스크립트(메인) -->
     <script type="module">
       import { SITE_MAP } from '/menu/js/data/site_map.js'; // /menu의 메뉴 데이터를 그대로 가져옵니다
 
-      // 선택자를 받아 요소 하나를 찾는 간단한 도우미입니다
-      const $ = (sel) => document.querySelector(sel);
+      const $ = (sel) => document.querySelector(sel); // 선택자를 받아 요소를 찾는 간단한 도우미입니다
 
-      // 루트 메인에서 쓸 상단 드롭다운을 그려주는 함수입니다
-      function buildTopNavRoot(){ /* 메인페이지 상단 메뉴를 만듭니다 */
-        const nav = $('#topNav'); /* 상단 네비게이션 상자를 찾습니다 */
-        nav.innerHTML = ''; /* 혹시 이전 내용이 있으면 지웁니다 */
+      function buildTopNavRoot(){ // 메인페이지 상단 드롭다운 메뉴를 만듭니다
+        const nav = $('#topNav'); // 상단 네비게이션 상자입니다
+        nav.innerHTML = ''; // 혹시 이전 내용이 있으면 지웁니다
 
-        SITE_MAP.forEach(group => { /* 대분류를 하나씩 꺼냅니다 */
-          const btn = document.createElement('button'); /* 버튼을 만듭니다 */
-          btn.className = 'menu-btn'; /* 버튼에 스타일을 붙입니다 */
-          btn.textContent = group.title; /* 버튼 글자를 대분류 이름으로 합니다 */
+        SITE_MAP.forEach(group => { // 대분류를 하나씩 처리합니다
+          const btn = document.createElement('button'); // 버튼을 만듭니다
+          btn.className = 'menu-btn'; // 버튼 모양을 적용합니다
+          btn.textContent = group.title; // 대분류 이름을 씁니다
 
-          const dd = document.createElement('div'); /* 드롭다운 상자를 만듭니다 */
-          dd.className = 'dropdown'; /* 드롭다운 모양을 적용합니다 */
+          const dd = document.createElement('div'); // 드롭다운 상자를 만듭니다
+          dd.className = 'dropdown'; // 드롭다운 스타일을 적용합니다
 
-          group.items.forEach(it => { /* 중분류들을 하나씩 처리합니다 */
-            const a = document.createElement('a'); /* 링크를 만듭니다 */
-            a.href = `/menu/#/${it.code}`; /* /menu로 가서 해시 라우팅으로 열리게 합니다 */
-            a.textContent = it.title; /* 링크에 항목 이름을 적습니다 */
-            dd.appendChild(a); /* 드롭다운 안에 넣습니다 */
+          group.items.forEach(it => { // 중분류를 하나씩 넣습니다
+            const a = document.createElement('a'); // 링크를 만듭니다
+            a.href = `/menu/#/${it.code}`; // /menu로 가서 해시 라우팅으로 열리게 합니다
+            a.textContent = it.title; // 항목 이름을 씁니다
+            dd.appendChild(a); // 드롭다운에 붙입니다
           });
 
-          btn.appendChild(dd); /* 버튼 아래에 드롭다운을 붙입니다 */
-          nav.appendChild(btn); /* 상단 네비게이션에 버튼을 추가합니다 */
+          btn.appendChild(dd); // 버튼 밑에 드롭다운을 붙입니다
+          nav.appendChild(btn); // 상단 네비게이션에 버튼을 추가합니다
         });
       }
 
-      // 언어 버튼은 간단 안내만 띄우도록 합니다
-      function wireLangButtons(){ /* KR/EN 안내입니다 */
+      function wireLangButtons(){ // KR/EN 버튼에 간단 안내를 연결합니다
         const kr = document.getElementById('langKR');
         const en = document.getElementById('langEN');
         if(kr) kr.onclick = ()=>alert('한국어가 기본입니다.');
         if(en) en.onclick = ()=>alert('English version is under preparation.');
       }
 
-      // 문서가 준비되면 상단 메뉴를 그리고 버튼을 연결합니다
-      window.addEventListener('DOMContentLoaded', () => {
-        buildTopNavRoot(); /* 드롭다운 메뉴를 그립니다 */
-        wireLangButtons(); /* 언어 안내 버튼을 연결합니다 */
+      window.addEventListener('DOMContentLoaded', () => { // 문서가 준비되면
+        buildTopNavRoot(); // 드롭다운 메뉴를 그리고
+        wireLangButtons(); // 언어 버튼을 연결합니다
       });
     </script>
   </body> <!-- 화면 영역의 끝입니다 -->
