@@ -38,16 +38,19 @@
   </head> <!-- 설정 영역의 끝입니다 -->
 
   <body> <!-- 화면에 보이는 영역의 시작입니다 -->
-    <header> <!-- 페이지 맨 위에 항상 보이는 영역입니다 -->
-      <div class="wrap nav"> <!-- 헤더 안쪽을 가운데로 모읍니다 -->
+    <header class="site"> <!-- 상단 고정 헤더입니다 -->
+      <div class="wrap"> <!-- 내용을 가운데로 모읍니다 -->
         <a class="logo" href="/">DK Engineering</a> <!-- 로고입니다. 클릭하면 항상 메인(/)으로 옵니다 -->
-        <div class="nav-right"> <!-- 오른쪽 빠른 링크입니다 -->
-          <a class="btn" href="/menu/#/8-1_notice_board">공지</a> <!-- 공지로 바로 갑니다(해시 라우팅) -->
-          <a class="btn" href="/menu/#/7-1_ask_estimate">문의</a> <!-- 문의로 바로 갑니다 -->
-          <a class="btn-solid" href="/menu/">메뉴로 가기</a> <!-- 메뉴 허브(/menu/)로 들어갑니다 -->
-        </div> <!-- 오른쪽 링크의 끝입니다 -->
-      </div> <!-- 헤더 안쪽의 끝입니다 -->
-    </header> <!-- 헤더의 끝입니다 -->
+        <nav class="top" id="topNav"></nav> <!-- 드롭다운 메뉴가 자동으로 들어옵니다 -->
+        <div class="actions"> <!-- 오른쪽 빠른 버튼입니다 -->
+          <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">문의하기</a> <!-- /menu로 해시 라우팅 이동 -->
+          <a class="btn-solid" href="/menu/#/6-4_data_proposal">브로슈어</a> <!-- /menu로 해시 라우팅 이동 -->
+          <button class="lang" id="langKR">KR</button> <!-- 언어 안내 버튼 -->
+          <button class="lang" id="langEN">EN</button> <!-- 언어 안내 버튼 -->
+        </div> <!-- 버튼 묶음 끝 -->
+      </div> <!-- 가운데 상자 끝 -->
+    </header> <!-- 헤더 끝 -->
+
 
     <section class="hero"> <!-- 첫 화면의 큰 소개 영역입니다 -->
       <div class="wrap hero-grid"> <!-- 내용을 좌우로 나눠 담는 상자입니다 -->
