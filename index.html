@@ -32,45 +32,54 @@
         background: var(--bg); /* 기본은 흰 배경입니다 */
       } /* 섹션 기본 규칙의 끝입니다 */
 
-      /* === [섹션 배경 이미지를 화면에 꽉 채우는 공통 규칙] === */
-      .page.bg{ /* 배경사진을 쓰는 섹션에 붙일 공통 클래스입니다 */
-        position:relative;            /* ::before 절대배치를 위한 기준점입니다 */
-        background:transparent;       /* 흰 배경을 지워서 ::before가 보이게 합니다 ← 핵심 수정 */
-        color:#fff;                   /* 사진 위에서 글자가 잘 보이도록 흰색으로 */
-      }
-      .page.bg::before{ /* 진짜 배경 이미지를 그리는 보조 레이어입니다 */
-        content:"";                   /* 레이어를 만들기 위한 빈 내용입니다 */
-        position:absolute;            /* 섹션을 가득 덮도록 절대 위치를 씁니다 */
-        inset:0;                      /* 위·오른쪽·아래·왼쪽을 모두 0으로 맞춰 꽉 채웁니다 */
-        background-position:center;   /* 사진의 가운데를 기준으로 맞춥니다 */
-        background-size:cover;        /* 사진이 늘어나더라도 빈 칸 없이 꽉 채웁니다 */
-        background-repeat:no-repeat;  /* 사진이 반복되지 않게 합니다 */
-        filter:brightness(.72);       /* 사진을 살짝 어둡게 해 글자가 잘 보이게 합니다 */
-        z-index:-1;                   /* 글자/콘텐츠 뒤쪽에 위치시킵니다 */
-        pointer-events:none;          /* 클릭 이벤트를 가로채지 않게 합니다 */
-      }
+      /* === [섹션 배경 이미지를 화면에 꽉 채우는 공통 규칙] ====================== */
+.page.bg{ /* 배경사진을 쓰는 섹션에 붙일 공통 클래스입니다 */
+  position:relative;        /* ::before 절대배치의 기준점이 됩니다 */
+  z-index:0;                /* 자식의 z-index:-1이 섹션 바깥으로 빠지지 않게 막습니다 ← 핵심 수정 */
+  background:transparent;   /* 흰 배경을 지워서 ::before가 보이게 합니다 */
+  color:#fff;               /* 사진 위에서 기본 글자를 하얀색으로 보이게 합니다 */
+}
+.page.bg::before{ /* 진짜 배경 이미지를 그리는 레이어입니다 */
+  content:"";               /* 빈 내용을 만들어 레이어를 생성합니다 */
+  position:absolute;        /* 섹션을 가득 덮도록 고정합니다 */
+  inset:0;                  /* 상하좌우 0으로 꽉 채웁니다 */
+  background-position:center;   /* 사진의 중심을 기준으로 맞춥니다 */
+  background-size:cover;        /* 빈칸 없이 가득 채웁니다 */
+  background-repeat:no-repeat;  /* 사진이 반복되지 않게 합니다 */
+  filter:brightness(.86);       /* 전체를 조금 더 밝게 조정합니다(기존 .72 → .86) */
+  z-index:-1;                   /* 글자/콘텐츠 뒤쪽에 위치시킵니다 */
+  pointer-events:none;          /* 클릭을 가로채지 않습니다 */
+}
 
-      /* === [각 섹션별로 다른 배경 사진을 지정합니다] === */
-      #s1.page.bg::before{
-        background-image:
-          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-          url('/img/hero-1.jpg'); /* 전기2.jpg */
-      }
-      #s2.page.bg::before{
-        background-image:
-          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-          url('/img/hero-2.jpg'); /* 전기9.jpg */
-      }
-      #s3.page.bg::before{
-        background-image:
-          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-          url('/img/hero-3.jpg'); /* 통신4.jpg */
-      }
-      #s4.page.bg::before{
-        background-image:
-          linear-gradient(0deg, rgba(0,0,0,.30), rgba(0,0,0,.30)),
-          url('/img/hero-4.jpg'); /* 통신7.jpg */
-      }
+/* === [각 섹션별로 다른 배경 사진을 지정합니다] =========================== */
+#s1.page.bg::before{ /* 1번 화면의 배경입니다 */
+  background-image:
+    linear-gradient(0deg, rgba(0,0,0,.18), rgba(0,0,0,.18)), /* 어둡기 줄임(.30 → .18) */
+    url('/img/hero-1.jpg'); /* hero-1.jpg */
+}
+#s2.page.bg::before{ /* 2번 화면의 배경입니다 */
+  background-image:
+    linear-gradient(0deg, rgba(0,0,0,.18), rgba(0,0,0,.18)),
+    url('/img/hero-2.jpg'); /* hero-2.jpg */
+}
+#s3.page.bg::before{ /* 3번 화면의 배경입니다 */
+  background-image:
+    linear-gradient(0deg, rgba(0,0,0,.18), rgba(0,0,0,.18)),
+    url('/img/hero-3.jpg'); /* hero-3.jpg */
+}
+#s4.page.bg::before{ /* 4번 화면의 배경입니다 */
+  background-image:
+    linear-gradient(0deg, rgba(0,0,0,.18), rgba(0,0,0,.18)),
+    url('/img/hero-4.jpg'); /* hero-4.jpg */
+}
+
+/* === [사진 위 버튼/텍스트 가독성 보정] =================================== */
+.page.bg .eyebrow{ color:#fff; opacity:.98; }      /* 소제목을 좀 더 선명하게 합니다 */
+.page.bg .btn-ghost{ border-color:#ffffffc8; color:#fff; } /* 테두리형 버튼을 흰색으로 */
+.page.bg .btn-ghost:hover{ background:#ffffff24; } /* 호버 시 은은한 흰 배경 */
+.page.bg .hero-card,
+.page.bg .cta-box{ color:var(--text); }            /* 흰 박스 안의 글자는 원래 색 유지 */
+
 
       /* 히어로(첫 섹션)는 /menu의 클래스 체계를 그대로 사용합니다 */
       .hero .wrap{ padding: 44px 20px; } /* 좌우 여백과 위아래 여백을 지정합니다 */
