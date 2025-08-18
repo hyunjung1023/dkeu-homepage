@@ -16,32 +16,40 @@ html,body{background:var(--bg);color:var(--text);font-family:-apple-system,Blink
 
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:14px 20px} /* 내용을 가운데로 모읍니다 */
 
-/* ================= 헤더(상단 고정) ================= */
-header.site{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;box-shadow:var(--shadow)} /* 위에 고정되고 그라데이션이 들어갑니다 */
-header .wrap{display:flex;align-items:center;gap:18px} /* 안쪽 요소들을 가로로 배치합니다 */
-.logo{font-weight:800;font-size:20px;letter-spacing:.3px;white-space:nowrap} /* 로고 글자를 두껍게 보이게 합니다 */
-nav.top{display:flex;gap:10px;align-items:center;margin-left:auto} /* 메뉴 버튼줄입니다 */
+/* ================= 헤더(상단 고정, 흰색 버전) ================= */
+header.site{position:sticky;top:0;z-index:50;background:#FFFFFF;color:var(--text);border-bottom:1px solid var(--line);box-shadow:none} /* 흰색 헤더로 고정합니다 */
+header .wrap{display:flex;align-items:center;gap:18px} /* 헤더 안 요소를 가로 정렬합니다 */
 
-.menu-btn{position:relative;border:none;background:transparent;color:#fff;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700;transition:background var(--speed),transform var(--speed)} /* 대분류 버튼 모양입니다 */
-.menu-btn:hover{background:#ffffff1a;transform:translateY(-1px)} /* 마우스를 올리면 살짝 올라갑니다 */
-.dropdown{position:absolute;left:0;top:100%;min-width:220px;background:#fff;color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px;display:none} /* 중분류 상자입니다 */
-.dropdown a{display:block;text-decoration:none;color:var(--text);padding:10px 12px;border-radius:10px;transition:background var(--speed),padding var(--speed);font-size:14px} /* 드롭다운 링크 모양입니다 */
-.dropdown a:hover{background:#f7f7f7;padding-left:16px} /* 항목에 마우스를 올리면 강조합니다 */
-.menu-btn:hover .dropdown{display:block} /* 대분류를 누르면 중분류 상자가 보입니다 */
+/* === 이미지 로고(텍스트 제거) === */
+.logo{display:inline-flex;align-items:center;text-decoration:none;gap:0;font-size:0;line-height:0} /* 이미지만 쓰므로 여백/텍스트 영향 제거 */
+.logo img{height:20px;width:auto;display:block} /* 데스크톱 로고 높이(작게) */
+@media (max-width:960px){.logo img{height:18px}} /* 모바일에서는 더 작게 */
 
-/* 헤더 오른쪽 CTA/언어 스위치 */
+/* 네비게이션(대분류) */
+nav.top{display:flex;gap:10px;align-items:center;margin-left:auto} /* 오른쪽 정렬합니다 */
+.menu-btn{position:relative;border:none;background:transparent;color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700;transition:background var(--speed),transform var(--speed)} /* 대분류 버튼 모양입니다 */
+.menu-btn:hover{background:#00000008;transform:translateY(-1px)} /* 호버 시 살짝 강조합니다 */
+
+/* 드롭다운(슬라이드 다운) */
+nav.top .menu-btn .dropdown{position:absolute;left:0;top:calc(100% + 6px);min-width:220px;background:#fff;color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px;opacity:0;transform:translateY(8px);visibility:hidden;pointer-events:none;max-height:0;overflow:hidden;transition:opacity var(--speed) ease,transform var(--speed) ease,max-height var(--speed) ease,visibility 0s linear var(--speed)} /* 초기에는 숨겨 둡니다 */
+nav.top .menu-btn:hover .dropdown,
+nav.top .menu-btn:focus-within .dropdown{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto;max-height:600px;transition:opacity var(--speed) ease,transform var(--speed) ease,max-height var(--speed) ease,visibility 0s} /* 호버/포커스 시 펼칩니다 */
+nav.top .dropdown a{display:block;text-decoration:none;color:var(--text);padding:10px 12px;border-radius:10px;transition:background var(--speed),padding var(--speed);font-size:14px} /* 항목 기본 모양입니다 */
+nav.top .dropdown a:hover{background:#fafafa;padding-left:16px} /* 항목 호버 시 살짝 밀리는 느낌을 줍니다 */
+
+/* 헤더 오른쪽 액션(버튼/언어) — 흰 헤더에 맞게 재설정 */
 .actions{display:flex;gap:10px;align-items:center;margin-left:10px} /* 버튼을 가로로 정렬합니다 */
-.btn-ghost{border:1px solid #ffffffbf;color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none;transition:background var(--speed)} /* 테두리만 있는 버튼입니다 */
-.btn-ghost:hover{background:#ffffff1a} /* 살짝 하얗게 바뀝니다 */
-.btn-solid{background:#fff;color:var(--brand-2);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:800} /* 꽉 찬 하얀 버튼입니다 */
-.lang{border:none;background:transparent;color:#fff;padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:800} /* KR/EN 버튼입니다 */
-.lang:hover{background:#ffffff1a} /* 눌렀을 때 살짝 하얗게 보입니다 */
+.btn-ghost{border:1px solid var(--line);color:var(--text);padding:8px 12px;border-radius:10px;text-decoration:none;background:transparent;transition:background var(--speed),border-color var(--speed)} /* 테두리형 버튼입니다 */
+.btn-ghost:hover{background:#00000008} /* 호버 시 옅은 회색 배경으로 */
+.btn-solid{background:var(--brand);color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:800} /* 포인트(빨간) 버튼입니다 */
+.lang{border:none;background:transparent;color:var(--text);padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:800} /* KR/EN 버튼입니다 */
+.lang:hover{background:#00000008} /* 눌렀을 때 살짝 강조합니다 */
 
 /* ================= 히어로(첫 화면) ================= */
-.hero{background:linear-gradient(180deg,rgba(178,34,34,.12),rgba(178,34,34,0))} /* 레드 계열 그라데이션으로 HPS 느낌을 냅니다 */
+.hero{background:linear-gradient(180deg,rgba(178,34,34,.12),rgba(178,34,34,0))} /* 레드 계열 그라데이션으로 HPS 느낌을 살짝 냅니다 */
 .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;padding:44px 20px} /* 히어로를 좌우 2칸으로 놓습니다 */
 .eyebrow{color:var(--brand-2);font-weight:900;letter-spacing:.12em;font-size:12px;text-transform:uppercase;margin-bottom:8px} /* 얇은 영어 소제목입니다 */
-.hero-title{font-size:38px;line-height:1.22;color:#111} /* 큰 제목 모양입니다 */
+.hero-title{font-size:38px;line-height:1.22;color:#111} /* 큰 제목 기본색입니다(메인에서는 index.html에서 흰색으로 오버라이드했습니다) */
 .hero-sub{color:var(--muted);margin-top:10px} /* 작은 설명입니다 */
 .hero-ctas{display:flex;gap:10px;margin-top:14px} /* 버튼 묶음입니다 */
 
@@ -51,7 +59,7 @@ nav.top{display:flex;gap:10px;align-items:center;margin-left:auto} /* 메뉴 버
 .biz-card{display:flex;align-items:center;justify-content:center;height:86px;border-radius:12px;text-decoration:none;color:#111;font-weight:900;border:1px solid var(--line);transition:transform var(--speed),box-shadow var(--speed),background var(--speed)} /* 카드 기본 모양입니다 */
 .biz-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);background:#fafafa} /* 카드에 마우스를 올렸을 때 효과입니다 */
 
-/* KPI 숫자 3개 */
+/* ================= KPI(숫자 3개) ================= */
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px} /* 숫자 3칸을 가로로 나열합니다 */
 .kpis li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;box-shadow:var(--shadow)} /* 각 칸의 모양입니다 */
 .kpi-num{font-size:28px;font-weight:900;color:var(--brand-2)} /* 커다랗게 보이는 숫자입니다 */
@@ -85,130 +93,9 @@ footer{background:#f5f5f5;margin-top:40px;border-top:1px solid var(--line)} /* �
 .f-links a{text-decoration:none;color:#111;border-bottom:1px dashed var(--line)} /* 점선 밑줄로 링크 느낌을 줍니다 */
 
 /* ================= 반응형(화면이 좁을 때) ================= */
-@media (max-width: 960px){
+@media (max-width:960px){
   .hero-grid{grid-template-columns:1fr} /* 히어로를 한 줄로 쌓습니다 */
   .main-grid{grid-template-columns:1fr} /* 본문도 한 줄로 쌓습니다 */
   .side{position:relative;top:auto} /* 왼쪽 메뉴를 고정하지 않습니다 */
   nav.top{display:none} /* 상단 대분류 메뉴는 모바일에서 숨깁니다 */
-}
-
-/* === 로고 문구/색/밑줄 통일 오버라이드 (메인 + /menu 공통) === */
-.logo{ /* 헤더의 왼쪽 로고 앵커입니다 */
-  color:#B22222;           /* 요청하신 대광 레드(#B22222)로 고정합니다 */
-  text-decoration:none;    /* 밑줄을 없앱니다 */
-  font-weight:900;         /* 굵게 보이도록 합니다 */
-}
-.logo:visited{ /* 방문한 링크여도 색이 바뀌지 않게 합니다 */
-  color:#B22222;           /* 보라색으로 변하지 않도록 동일 색상 고정 */
-  text-decoration:none;    /* 밑줄이 생기지 않게 합니다 */
-}
-.logo:hover,
-.logo:focus{               /* 마우스를 올리거나 키보드 포커스가 왔을 때 */
-  color:#B22222;           /* 색 유지 */
-  text-decoration:none;    /* 밑줄 유지 제거 */
-  opacity:.95;             /* 살짝만 강조 효과 */
-}
-
-
-/* ================= 공통 헤더(흰색)로 덮어쓰기 ================= */
-/* 아래 규칙은 파일 위쪽의 같은 이름 규칙을 '덮어써서' 흰색 헤더로 만듭니다 */
-header.site{ /* 페이지 맨 위의 고정 헤더입니다 */
-  position:sticky; /* 화면 위에 붙어 있게 합니다 */
-  top:0; /* 꼭대기에 붙입니다 */
-  z-index:50; /* 다른 요소보다 위에 보이게 합니다 */
-  background:#FFFFFF; /* 헤더 배경을 하얀색으로 합니다 */
-  color:var(--text); /* 헤더 안의 글자색입니다 */
-  border-bottom:1px solid var(--line); /* 아래쪽에 얇은 구분선을 넣습니다 */
-  box-shadow:none; /* 불필요한 그림자를 없앱니다 */
-}
-nav.top{ /* 상단 메뉴 버튼들이 줄로 보입니다 */
-  display:flex; gap:10px; align-items:center; margin-left:auto; /* 오른쪽으로 붙입니다 */
-}
-.menu-btn{ /* 대분류 버튼의 기본 모양입니다 */
-  position:relative; /* 아래에 열릴 드롭다운의 기준점이 됩니다 */
-  border:none; /* 테두리를 없앱니다 */
-  background:transparent; /* 배경을 투명하게 합니다 */
-  color:var(--text); /* 글자를 검정(서브포인트)으로 합니다 */
-  padding:10px 12px; /* 버튼 안쪽 여백입니다 */
-  border-radius:10px; /* 버튼 모서리를 둥글게 합니다 */
-  cursor:pointer; /* 손가락 모양 커서가 됩니다 */
-  font-weight:700; /* 글자를 굵게 보이게 합니다 */
-  transition:background var(--speed), transform var(--speed); /* 움직임을 부드럽게 합니다 */
-}
-.menu-btn:hover{ /* 마우스를 올렸을 때입니다 */
-  background:#00000008; /* 아주 옅은 회색 배경으로 살짝 강조합니다 */
-  transform:translateY(-1px); /* 위로 1px 떠오르게 합니다 */
-}
-
-/* ================= 드롭다운(슬라이드 다운 효과) ================= */
-nav.top .menu-btn .dropdown{ /* 펼쳐질 중분류 상자입니다 */
-  position:absolute; /* 버튼 바로 아래에 뜨도록 합니다 */
-  left:0; top:calc(100% + 6px); /* 버튼 아래로 6px 떨어뜨립니다 */
-  min-width:220px; /* 너무 좁지 않게 최소 가로폭을 줍니다 */
-  background:#fff; color:var(--text); /* 하얀 배경과 검정 글자입니다 */
-  border:1px solid var(--line); /* 얇은 테두리(보조선)입니다 */
-  border-radius:12px; /* 상자 모서리를 둥글게 합니다 */
-  box-shadow:var(--shadow); /* 살짝 그림자를 넣어 띄워 보이게 합니다 */
-  padding:8px; /* 안쪽 여백입니다 */
-
-  /* 슬라이드 효과를 위한 초기 상태(숨김)입니다 */
-  opacity:0; /* 투명하게 숨깁니다 */
-  transform:translateY(8px); /* 아래쪽에 있다가 올라오게 합니다 */
-  visibility:hidden; /* 화면에서 안 보이게 합니다 */
-  pointer-events:none; /* 숨길 때는 클릭되지 않게 합니다 */
-  max-height:0; overflow:hidden; /* 높이를 0으로 해서 접어둡니다 */
-
-  /* 보여질 때 애니메이션이 자연스럽게 보이도록 전환을 지정합니다 */
-  transition:
-    opacity var(--speed) ease, /* 투명도 변화 */
-    transform var(--speed) ease, /* 위치 변화 */
-    max-height var(--speed) ease, /* 높이 변화(슬라이드 느낌) */
-    visibility 0s linear var(--speed); /* 다 보인 뒤에만 보이게 전환 */
-}
-nav.top .menu-btn:hover .dropdown,
-nav.top .menu-btn:focus-within .dropdown{ /* 마우스를 올리거나 키보드로 들어왔을 때 */
-  opacity:1; /* 선명하게 보이게 합니다 */
-  transform:translateY(0); /* 제자리로 올라오게 합니다 */
-  visibility:visible; /* 화면에 보이게 합니다 */
-  pointer-events:auto; /* 이제 클릭할 수 있게 합니다 */
-  max-height:600px; /* 충분한 높이로 펼칩니다 */
-  transition:
-    opacity var(--speed) ease,
-    transform var(--speed) ease,
-    max-height var(--speed) ease,
-    visibility 0s; /* 즉시 보이도록 바꿉니다 */
-}
-nav.top .dropdown a{ /* 드롭다운 안의 각 링크입니다 */
-  display:block; /* 줄바꿈이 되는 블록으로 만듭니다 */
-  text-decoration:none; /* 밑줄을 없앱니다 */
-  color:var(--text); /* 글자색입니다 */
-  padding:10px 12px; /* 안쪽 여백입니다 */
-  border-radius:10px; /* 모서리를 둥글게 합니다 */
-  transition:background var(--speed), padding var(--speed); /* 효과를 부드럽게 합니다 */
-  font-size:14px; /* 글자 크기입니다 */
-}
-nav.top .dropdown a:hover{ /* 항목 위에 마우스를 올렸을 때입니다 */
-  background:#fafafa; /* 아주 옅은 회색으로 강조합니다 */
-  padding-left:16px; /* 왼쪽 여백을 늘려 살짝 밀리는 느낌을 줍니다 */
-}
-
-/* === 이미지 로고 공통 스타일(메인 + /menu 공통) ====================== */
-/* 로고 앵커 자체의 정렬/간격 */
-.logo{
-  display:inline-flex;        /* 로고를 옆 요소와 수평정렬합니다 */
-  align-items:center;         /* 세로 가운데 정렬입니다 */
-  gap:8px;                    /* (필요 시) 아이콘/텍스트 간격입니다 */
-  text-decoration:none;       /* 밑줄을 없앱니다 */
-}
-
-/* 로고 이미지 크기(헤더 높이에 맞춰 자동 축소/확대) */
-.logo img{
-  height:26px;                /* 데스크톱 기본 높이입니다 */
-  width:auto;                 /* 가로 비율을 유지합니다 */
-  display:block;              /* 이미지 밑 공백을 없앱니다 */
-}
-
-/* 모바일에서 살짝 작게 보이도록 조정합니다 */
-@media (max-width: 960px){
-  .logo img{ height:22px; }
 }
