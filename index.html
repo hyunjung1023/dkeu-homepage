@@ -1,48 +1,45 @@
 <!DOCTYPE html> <!-- HTML5 문서 선언입니다 -->
 <html lang="ko"> <!-- 문서 기본 언어를 한국어로 설정합니다 -->
   <head> <!-- 보이지 않는 설정 영역입니다 -->
-    <meta charset="UTF-8" /> <!-- 한글이 깨지지 않도록 UTF-8 인코딩을 씁니다 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 모바일 대응입니다 -->
-    <title>대광사업단 — 메인</title> <!-- 브라우저 탭 제목입니다 -->
+    <meta charset="UTF-8" /> <!-- 한글 깨짐 방지 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 모바일 대응 -->
+    <title>대광사업단 — 메인</title> <!-- 브라우저 탭 제목 -->
 
-    <!-- 공용 스타일: 상단바/드롭다운/버튼 등 전역 헤더는 여기서만 관리합니다 -->
-    <!-- v 파라미터는 브라우저 캐시 무력화용입니다(파일 수정 시 숫자만 변경) -->
-    <link rel="stylesheet" href="/menu/css/style.css?v=20250821-2" /> <!-- /menu와 상단이 100% 동일해집니다 -->
-
+    <!-- 공용 스타일: 상단바/드롭다운/햄버거 드로어 포함 -->
+    <!-- v 파라미터는 캐시 무력화용입니다. 수정 시 숫자만 바꾸세요. -->
+    <link rel="stylesheet" href="/menu/css/style.css?v=20250821-3" />
+    
     <style>
-      /* ========= [메인 전용 기본/스냅/섹션 배경만 남깁니다 — 헤더 관련은 없음] ========= */
-      :root{ /* 스냅 오프셋 계산용 헤더 높이입니다 */
-        --header-h: 70px; /* 고정 헤더 높이만큼 스크롤 패딩을 줍니다 */
+      /* ========= [메인 전용: 스냅/배경/섹션 크기] — 헤더 관련 스타일은 전부 style.css에서 관리 ========= */
+      :root{ --header-h: 70px; } /* 고정 헤더 높이(스냅 패딩용) */
+
+      html, body{
+        height:100%;
+        background: var(--bg);            /* 기본 배경색(#fff) */
+        scroll-behavior:smooth;           /* 부드러운 스크롤 */
+        scroll-padding-top: var(--header-h); /* 고정 헤더 높이만큼 앵커 여백 */
       }
 
-      html, body{ /* 화면 전체 공통 설정입니다 */
-        height:100%; /* 화면 높이에 맞춥니다 */
-        background: var(--bg); /* 배경은 사이트 기본(#fff)로 둡니다 */
-        scroll-behavior:smooth; /* 앵커 스크롤을 부드럽게 합니다 */
-        scroll-padding-top: var(--header-h); /* 고정 헤더 높이만큼 위 여백을 둡니다 */
+      main.pages{ scroll-snap-type: y mandatory; } /* 섹션 단위 스냅 */
+
+      section.page{
+        scroll-snap-align: start;  /* 섹션 시작 지점에 스냅 */
+        min-height: 100svh;        /* 주소창 변화에도 안정적인 높이 */
+        display:grid;              /* 내부 배치를 위해 그리드 사용 */
+        align-content:center;      /* 세로 중앙 정렬 */
+        background: var(--bg);     /* 기본은 흰 배경 */
       }
 
-      main.pages{ /* 섹션 단위 스냅 스크롤 컨테이너입니다 */
-        scroll-snap-type: y mandatory; /* 세로 방향으로 꼭 스냅되게 합니다 */
-      }
-
-      section.page{ /* 각 섹션의 기본 규칙입니다 */
-        scroll-snap-align: start; /* 섹션 시작 지점에 맞춰 스냅합니다 */
-        min-height: 100svh; /* 주소창 변화에도 안정적인 높이입니다 */
-        display:grid; /* 안쪽 배치를 쉽게 하기 위해 그리드로 둡니다 */
-        align-content:center; /* 세로 중앙 정렬입니다 */
-        background: var(--bg); /* 기본은 흰 배경입니다 */
-      }
-
-      /* ===== [배경 사진 섹션 공통] ===================================================== */
-      .page.bg{ position:relative; z-index:0; background:transparent; color:#fff; } /* 사진 위에서 글자를 흰색으로 */
+      /* ===== 배경 사진 섹션 공통 ===== */
+      .page.bg{ position:relative; z-index:0; background:transparent; color:#fff; }
       .page.bg::before{
         content:""; position:absolute; inset:0;
         background-position:center; background-size:cover; background-repeat:no-repeat;
-        filter:brightness(.86); z-index:-1; pointer-events:none; /* 사진을 약간 어둡게(가독성↑) */
+        filter:brightness(.86);             /* 약간 어둡게 해서 가독성↑ */
+        z-index:-1; pointer-events:none;    /* 콘텐츠 뒤쪽 배경 레이어 */
       }
 
-      /* 섹션별 배경 이미지(전기2/전기9/통신4/통신7) */
+      /* 섹션별 배경 이미지(1~4) */
       #s1.page.bg::before{ background-image:
         linear-gradient(0deg, rgba(0,0,0,.18), rgba(0,0,0,.18)),
         url('/img/hero-1.jpg'); }
@@ -64,15 +61,15 @@
       .page.bg .btn-ghost:hover{ background:#ffffff24; }
       .page.bg .hero-card, .page.bg .cta-box{ color:var(--text); }
 
-      /* 메인 전용 섹션(헤더가 아닌 영역) 크기/여백 */
-      .hero .wrap{ padding:60px 24px; }           /* 히어로 여백(44→60) */
-      .hero-title{ font-size:46px; line-height:1.18; } /* 제목(38→46) */
-      .hero-sub{ font-size:18px; margin-top:10px; }    /* 부제(가독↑) */
+      /* 메인 전용 섹션 크기/여백 */
+      .hero .wrap{ padding:60px 24px; }
+      .hero-title{ font-size:46px; line-height:1.18; }
+      .hero-sub{ font-size:18px; margin-top:10px; }
 
-      .section-business .wrap{ padding:60px 24px; }    /* 2번 섹션 여백 */
+      .section-business .wrap{ padding:60px 24px; }
       .section-business .desc{ color:var(--muted); margin-bottom:12px; }
 
-      .kpi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; } /* 3번 KPI 간격 */
+      .kpi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
       .kpi-card{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px; text-align:center; box-shadow:var(--shadow); }
       .kpi-num{ font-size:34px; font-weight:900; color:var(--brand-2); }
       .kpi-label{ font-size:13px; color:var(--muted); margin-top:4px; }
@@ -88,7 +85,7 @@
       .dotnav a.active{ background:var(--brand); border-color:var(--brand); }
       .dotnav a:hover{ transform:scale(1.15); }
 
-      .scroll-hint{ position:absolute; left:50%; bottom:14px; transform:translateX(-50%); font-size:12px; color:#ffffffd8; } /* 스크롤 유도 텍스트 */
+      .scroll-hint{ position:absolute; left:50%; bottom:14px; transform:translateX(-50%); font-size:12px; color:#ffffffd8; }
 
       /* 등장 애니메이션 */
       .reveal{ opacity:0; transform:translateY(8px); transition: opacity 320ms ease, transform 320ms ease; }
@@ -99,24 +96,22 @@
         .kpi-grid{ grid-template-columns:1fr; }
         .dotnav{ right:10px; }
       }
-    </style> <!-- 메인 전용(섹션/배경/스냅만) 스타일의 끝입니다 -->
+    </style>
   </head>
 
-  <body> <!-- 화면에 보이는 영역 시작입니다 -->
-    <!-- 상단바: 두 페이지가 "완전히 동일한" 구조/내용으로 유지됩니다 -->
-    <header class="site"> <!-- 고정 헤더입니다 -->
-      <div class="wrap"> <!-- 가운데 정렬 상자입니다 -->
-        <a class="logo" href="/" aria-label="대광사업단"><img src="/img/logo-full.png" alt="대광사업단"></a> <!-- 이미지 로고(텍스트 없음) -->
-        <nav class="top" id="topNav"></nav> <!-- 드롭다운 메뉴가 채워질 자리입니다 -->
-
-        <!-- [임시 비활성화 시작: 상단 우측 버튼(문의하기, KR, EN)] 
+  <body> <!-- 화면에 보이는 영역 시작 -->
+    <!-- 상단바(공용): 로고 + 데스크톱 드롭다운 + 모바일 햄버거 드로어 -->
+    <header class="site">
+      <div class="wrap">
+        <a class="logo" href="/" aria-label="대광사업단"><img src="/img/logo-full.png" alt="대광사업단"></a>
+        <nav class="top" id="topNav"></nav>
+        <!-- [임시 비활성화 시작: 상단 우측 버튼(문의하기, KR, EN)]
         <div class="actions">
           <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">문의하기</a>
           <button class="lang" id="langKR">KR</button>
           <button class="lang" id="langEN">EN</button>
         </div>
         [임시 비활성화 끝] -->
- 
       </div>
     </header>
 
@@ -225,15 +220,17 @@
 
     <!-- 공용 헤더 스크립트 + 메인 전용 인터랙션 -->
     <script type="module">
-      import { buildTopNav, wireLangButtons } from '/menu/js/topnav.js'; // 공용 헤더 스크립트
-      const $ = (sel) => document.querySelector(sel); // 간단 선택자 도우미입니다
+      import { initTopBar } from '/menu/js/topnav.js';  /* 공용 상단바(데스크톱 드롭다운 + 모바일 햄버거) 초기화 */
+      const $ = (sel) => document.querySelector(sel);   /* 간단 선택자 도우미 */
 
-      // KPI 숫자 애니메이션
+      /* KPI 숫자 애니메이션 */
       function animateKPIs(){
         document.querySelectorAll('.kpi-num').forEach(el=>{
           const target = parseInt(el.dataset.count||'0',10);
           const dur = 900; let start=null;
-          function step(t){ if(!start) start=t; const p=Math.min((t-start)/dur,1);
+          function step(t){
+            if(!start) start=t;
+            const p=Math.min((t-start)/dur,1);
             el.textContent = Math.floor(target*p).toLocaleString();
             if(p<1) requestAnimationFrame(step);
           }
@@ -241,7 +238,7 @@
         });
       }
 
-      // 스크롤 인터섹션(등장 애니메이션/점 네비/ KPI 트리거)
+      /* 인터섹션: 등장 애니메이션 + 점 네비 상태 + KPI 트리거 */
       function wireScrollEffects(){
         const dots = [$('#d1'), $('#d2'), $('#d3'), $('#d4')];
         const sections = ['s1','s2','s3','s4'].map(id=>document.getElementById(id));
@@ -252,20 +249,17 @@
               const idx = sections.indexOf(en.target);
               dots.forEach(d=>d && d.classList.remove('active'));
               if(dots[idx]) dots[idx].classList.add('active');
-              if(en.target.id==='s3' && !en.target._kpiDone){
-                animateKPIs(); en.target._kpiDone = true;
-              }
+              if(en.target.id==='s3' && !en.target._kpiDone){ animateKPIs(); en.target._kpiDone = true; }
             }
           });
         }, { threshold:0.55 });
         sections.forEach(sec=> io.observe(sec));
       }
 
-      // 초기 실행: 공용 헤더 → 메인 인터랙션
+      /* 초기 실행: 공용 상단바 → 메인 인터랙션 */
       window.addEventListener('DOMContentLoaded', ()=>{
-        buildTopNav();        // 헤더 메뉴를 공통 로직으로 그립니다
-        wireLangButtons();    // 언어 버튼을 공통 로직으로 연결합니다
-        wireScrollEffects();  // 메인 전용 스크롤 효과를 켭니다
+        initTopBar();       /* 상단바(공통) 구성 + 모바일 햄버거 준비 */
+        wireScrollEffects();/* 메인 전용 스크롤 효과 */
       });
     </script>
   </body>
