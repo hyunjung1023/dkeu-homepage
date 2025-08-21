@@ -156,3 +156,60 @@ nav.top .dropdown a{
   :root{ --header-scale: 1.2; }  // 휴대폰에서만 1.2배로 제한
 }
 */
+
+
+
+
+/* ====================== 모바일 햄버거/드로어 ====================== */
+.hamburger{
+  display:none;                 /* 데스크톱에서는 감춤 */
+  border:none; background:transparent;
+  width:40px; height:40px;      /* 터치하기 좋은 크기 */
+  align-items:center; justify-content:center;
+  border-radius:10px; cursor:pointer;
+}
+.hamburger span{
+  display:block; width:22px; height:2px; background:var(--text);
+  margin:3px 0; transition:transform var(--speed), opacity var(--speed);
+}
+
+.mnav-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.35);
+  backdrop-filter:blur(1px); opacity:0; visibility:hidden;
+  transition:opacity var(--speed); z-index:120;
+}
+.mnav-backdrop.on{ opacity:1; visibility:visible; }
+
+.mnav{
+  position:fixed; top:0; right:0; height:100vh; width:min(86vw,340px);
+  background:#fff; border-left:1px solid var(--line); box-shadow:var(--shadow);
+  transform:translateX(100%); transition:transform var(--speed); z-index:121;
+  display:flex; flex-direction:column;
+}
+.mnav.on{ transform:translateX(0); }
+.mnav-head{ display:flex; justify-content:flex-end; padding:12px; border-bottom:1px solid var(--line); }
+.mnav-close{ border:none; background:transparent; font-size:28px; line-height:1; padding:4px 8px; cursor:pointer; }
+
+.mnav-body{ padding:8px 6px; overflow:auto; }
+.mnav-group-btn{
+  width:100%; text-align:left; background:transparent; border:none;
+  font-weight:900; padding:12px 10px; border-radius:10px; cursor:pointer;
+}
+.mnav-group-btn:hover{ background:#f7f7f7; }
+.mnav-sub{ display:none; padding:2px 0 8px 8px; }
+.mnav-sub.open{ display:block; }
+.mnav-sub a{
+  display:block; text-decoration:none; color:var(--text);
+  padding:10px; border-radius:10px;
+}
+.mnav-sub a:hover{ background:#fafafa; }
+
+/* 드로어 열릴 때 배경 스크롤 방지 */
+html.no-scroll, body.no-scroll{ overflow:hidden; }
+
+/* 모바일에서만 햄버거 보이기, 데스크톱에서는 기존 드롭다운 유지 */
+@media (max-width:960px){
+  nav.top{ display:none; }      /* 기존 데스크톱 드롭다운 감춤(이미 있으시면 중복 OK) */
+  .hamburger{ display:inline-flex; margin-left:8px; }
+}
+
