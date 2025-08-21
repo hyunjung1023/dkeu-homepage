@@ -48,6 +48,7 @@ header .wrap{display:flex;align-items:center;gap:18px}
 nav.top{display:flex;gap:14px;align-items:center;margin-left:auto}
 .menu-btn{
   position:relative;border:none;background:transparent;color:var(--text);
+  font-size: var(--menu-fs);
   padding:var(--menu-pad-v) var(--menu-pad-h);
   border-radius:calc(10px * var(--header-scale));
   cursor:pointer;font-weight:700;
