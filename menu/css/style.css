@@ -1,124 +1,103 @@
 :root { /* 전역에서 함께 쓰는 색/크기/속도 값을 보관합니다 */
   --brand:#B22222; /* 메인포인트 색상(대광 레드)입니다 */
-  --brand-2:#8F1A1A; /* 메인색보다 조금 더 어두운 레드입니다 */
-  --text:#333333; /* 기본 글자색(서브포인트)입니다 */
-  --muted:#666666; /* 설명 글자색(연한 회색)입니다 */
-  --bg:#FFFFFF; /* 배경색입니다 */
-  --line:#D3D3D3; /* 보조선 색상(테두리/구분선)입니다 */
+  --brand-2:#8F1A1A; /* 메인색보다 더 어두운 보조 레드입니다 */
+  --text:#333333; /* 기본 글자색입니다 */
+  --muted:#666666; /* 설명(연한 회색) 글자색입니다 */
+  --bg:#FFFFFF; /* 전체 배경색입니다 */
+  --line:#D3D3D3; /* 테두리/구분선 색입니다 */
   --radius:14px; /* 상자 모서리 둥근 정도입니다 */
   --shadow:0 10px 25px rgba(0,0,0,.08); /* 부드러운 그림자입니다 */
   --speed:260ms; /* 애니메이션 속도입니다 */
-  --maxw:1200px; /* 가운데 정렬 최대 너비입니다 */
+  --maxw:1280px; /* 가운데 정렬 최대 너비(1200→1280으로 확대)입니다 */
 } /* 전역 변수의 끝입니다 */
 
-*{box-sizing:border-box;margin:0;padding:0} /* 기본 여백을 모두 없애 깔끔하게 시작합니다 */
-html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif} /* 화면 글꼴과 색을 정합니다 */
+*{ box-sizing:border-box; margin:0; padding:0 } /* 기본 여백을 제거해 깔끔히 시작합니다 */
+html,body{ background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif } /* 화면 글꼴과 색을 정합니다 */
 
-.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:14px 20px} /* 내용을 가운데로 모읍니다 */
+.wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:14px 20px } /* 가운데 정렬 컨테이너입니다 */
 
-/* ================= 헤더(상단 고정, 흰색 버전) ================= */
-header.site{position:sticky;top:0;z-index:50;background:#FFFFFF;color:var(--text);border-bottom:1px solid var(--line);box-shadow:none} /* 흰색 헤더로 고정합니다 */
-header .wrap{display:flex;align-items:center;gap:18px} /* 헤더 안 요소를 가로 정렬합니다 */
+/* ================= 헤더(상단 고정, 흰색) ================= */
+header.site{ position:sticky; top:0; z-index:50; background:#FFFFFF; color:var(--text); border-bottom:1px solid var(--line); box-shadow:none } /* 흰색 헤더로 고정합니다 */
+header .wrap{ display:flex; align-items:center; gap:18px } /* 헤더 안 요소를 가로로 정렬합니다 */
 
-/* === 이미지 로고(텍스트 제거) === */
-.logo{display:inline-flex;align-items:center;text-decoration:none;gap:0;font-size:0;line-height:0} /* 이미지만 쓰므로 여백/텍스트 영향 제거 */
-.logo img{height:20px;width:auto;display:block} /* 데스크톱 로고 높이(작게) */
-@media (max-width:960px){.logo img{height:18px}} /* 모바일에서는 더 작게 */
+/* === 이미지 로고(텍스트 제거, 크기 확대 적용) === */
+.logo{ display:inline-flex; align-items:center; text-decoration:none; gap:0; font-size:0; line-height:0 } /* 이미지만 쓰므로 텍스트 영향/여백을 없앱니다 */
+.logo img{ height:24px; width:auto; display:block } /* 데스크톱 로고 높이를 24px로 키웁니다 */
+@media (max-width:960px){ .logo img{ height:20px } } /* 모바일에서는 20px로 맞춥니다 */
 
-/* 네비게이션(대분류) */
-nav.top{display:flex;gap:10px;align-items:center;margin-left:auto} /* 오른쪽 정렬합니다 */
-.menu-btn{position:relative;border:none;background:transparent;color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700;transition:background var(--speed),transform var(--speed)} /* 대분류 버튼 모양입니다 */
-.menu-btn:hover{background:#00000008;transform:translateY(-1px)} /* 호버 시 살짝 강조합니다 */
+/* === 네비게이션(대분류) === */
+nav.top{ display:flex; gap:14px; align-items:center; margin-left:auto } /* 메뉴 버튼 간격을 14px로 넓혀 가독성을 높입니다 */
+.menu-btn{ position:relative; border:none; background:transparent; color:var(--text); padding:12px 14px; border-radius:10px; cursor:pointer; font-weight:700; transition:background var(--speed), transform var(--speed) } /* 버튼 글자/패딩을 키워 클릭이 편합니다 */
+.menu-btn:hover{ background:#00000008; transform:translateY(-1px) } /* 호버 시 살짝 강조합니다 */
 
-/* 드롭다운(슬라이드 다운) */
-nav.top .menu-btn .dropdown{position:absolute;left:0;top:calc(100% + 6px);min-width:220px;background:#fff;color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px;opacity:0;transform:translateY(8px);visibility:hidden;pointer-events:none;max-height:0;overflow:hidden;transition:opacity var(--speed) ease,transform var(--speed) ease,max-height var(--speed) ease,visibility 0s linear var(--speed)} /* 초기에는 숨겨 둡니다 */
+/* === 드롭다운(슬라이드 다운) === */
+nav.top .menu-btn .dropdown{ position:absolute; left:0; top:calc(100% + 6px); min-width:220px; background:#fff; color:var(--text); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:8px; opacity:0; transform:translateY(8px); visibility:hidden; pointer-events:none; max-height:0; overflow:hidden; transition:opacity var(--speed) ease, transform var(--speed) ease, max-height var(--speed) ease, visibility 0s linear var(--speed) } /* 처음엔 접혀 있습니다 */
 nav.top .menu-btn:hover .dropdown,
-nav.top .menu-btn:focus-within .dropdown{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto;max-height:600px;transition:opacity var(--speed) ease,transform var(--speed) ease,max-height var(--speed) ease,visibility 0s} /* 호버/포커스 시 펼칩니다 */
-nav.top .dropdown a{display:block;text-decoration:none;color:var(--text);padding:10px 12px;border-radius:10px;transition:background var(--speed),padding var(--speed);font-size:14px} /* 항목 기본 모양입니다 */
-nav.top .dropdown a:hover{background:#fafafa;padding-left:16px} /* 항목 호버 시 살짝 밀리는 느낌을 줍니다 */
+nav.top .menu-btn:focus-within .dropdown{ opacity:1; transform:translateY(0); visibility:visible; pointer-events:auto; max-height:600px; transition:opacity var(--speed) ease, transform var(--speed) ease, max-height var(--speed) ease, visibility 0s } /* 호버/포커스 시 펼칩니다 */
+nav.top .dropdown a{ display:block; text-decoration:none; color:var(--text); padding:10px 12px; border-radius:10px; transition:background var(--speed), padding var(--speed); font-size:14px } /* 항목 기본 모양입니다 */
+nav.top .dropdown a:hover{ background:#fafafa; padding-left:16px } /* 항목 호버 시 살짝 밀리는 느낌을 줍니다 */
 
-/* 헤더 오른쪽 액션(버튼/언어) — 흰 헤더에 맞게 재설정 */
-.actions{display:flex;gap:10px;align-items:center;margin-left:10px} /* 버튼을 가로로 정렬합니다 */
-.btn-ghost{border:1px solid var(--line);color:var(--text);padding:8px 12px;border-radius:10px;text-decoration:none;background:transparent;transition:background var(--speed),border-color var(--speed)} /* 테두리형 버튼입니다 */
-.btn-ghost:hover{background:#00000008} /* 호버 시 옅은 회색 배경으로 */
-.btn-solid{background:var(--brand);color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:800} /* 포인트(빨간) 버튼입니다 */
-.lang{border:none;background:transparent;color:var(--text);padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:800} /* KR/EN 버튼입니다 */
-.lang:hover{background:#00000008} /* 눌렀을 때 살짝 강조합니다 */
+/* === 헤더 오른쪽 액션(버튼/언어) — 흰 헤더용 === */
+.actions{ display:flex; gap:10px; align-items:center; margin-left:10px } /* 버튼 줄을 정렬합니다 */
+.btn-ghost{ border:1px solid var(--line); color:var(--text); padding:8px 12px; border-radius:10px; text-decoration:none; background:transparent; transition:background var(--speed), border-color var(--speed) } /* 테두리형 버튼입니다 */
+.btn-ghost:hover{ background:#00000008 } /* 호버 시 옅은 회색 배경으로 보입니다 */
+.btn-solid{ background:var(--brand); color:#fff; padding:8px 12px; border-radius:10px; text-decoration:none; font-weight:800 } /* 포인트(빨간) 버튼입니다 */
+.lang{ border:none; background:transparent; color:var(--text); padding:6px 8px; border-radius:8px; cursor:pointer; font-weight:800 } /* KR/EN 버튼입니다 */
+.lang:hover{ background:#00000008 } /* 호버 시 살짝 강조합니다 */
 
 /* ================= 히어로(첫 화면) ================= */
-.hero{background:linear-gradient(180deg,rgba(178,34,34,.12),rgba(178,34,34,0))} /* 레드 계열 그라데이션으로 HPS 느낌을 살짝 냅니다 */
-.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;padding:44px 20px} /* 히어로를 좌우 2칸으로 놓습니다 */
-.eyebrow{color:var(--brand-2);font-weight:900;letter-spacing:.12em;font-size:12px;text-transform:uppercase;margin-bottom:8px} /* 얇은 영어 소제목입니다 */
-.hero-title{font-size:38px;line-height:1.22;color:#111} /* 큰 제목 기본색입니다(메인에서는 index.html에서 흰색으로 오버라이드했습니다) */
-.hero-sub{color:var(--muted);margin-top:10px} /* 작은 설명입니다 */
-.hero-ctas{display:flex;gap:10px;margin-top:14px} /* 버튼 묶음입니다 */
+.hero{ background:linear-gradient(180deg,rgba(178,34,34,.12),rgba(178,34,34,0)) } /* 레드 계열 그라데이션으로 HPS 느낌을 더합니다 */
+.hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:20px; padding:60px 24px } /* 좌우 2칸 배치 + 여백 확대(44→60)입니다 */
+.eyebrow{ color:var(--brand-2); font-weight:900; letter-spacing:.12em; font-size:12px; text-transform:uppercase; margin-bottom:8px } /* 얇은 영어 소제목입니다 */
+.hero-title{ font-size:46px; line-height:1.18; color:#111 } /* 큰 제목을 46px로 키웠습니다(메인에서는 index.html에서 흰색으로 덮어씀) */
+.hero-sub{ color:var(--muted); margin-top:10px; font-size:18px } /* 부제도 18px로 키워 가독성을 높였습니다 */
+.hero-ctas{ display:flex; gap:10px; margin-top:14px } /* 버튼 묶음입니다 */
+.hero-ctas .btn-solid,
+.hero-ctas .btn-ghost{ padding:10px 14px; font-weight:800 } /* 히어로 버튼도 살짝 키웠습니다 */
 
-.hero-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px} /* 오른쪽 카드입니다 */
-.quick-title{display:block;margin-bottom:10px;font-weight:900} /* 카드 제목입니다 */
-.biz-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px} /* 큰 카드 4개를 2x2로 배치합니다 */
-.biz-card{display:flex;align-items:center;justify-content:center;height:86px;border-radius:12px;text-decoration:none;color:#111;font-weight:900;border:1px solid var(--line);transition:transform var(--speed),box-shadow var(--speed),background var(--speed)} /* 카드 기본 모양입니다 */
-.biz-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);background:#fafafa} /* 카드에 마우스를 올렸을 때 효과입니다 */
+/* === 오른쪽 퀵 카드(비즈 카드) === */
+.hero-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px } /* 카드 상자입니다 */
+.quick-title{ display:block; margin-bottom:10px; font-weight:900; font-size:16px } /* 카드의 작은 제목을 키웠습니다 */
+.biz-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px } /* 2×2 카드 배치입니다 */
+.biz-card{ display:flex; align-items:center; justify-content:center; height:100px; border-radius:12px; text-decoration:none; color:#111; font-weight:900; border:1px solid var(--line); transition:transform var(--speed), box-shadow var(--speed), background var(--speed) } /* 카드 높이를 100px로 키웠습니다 */
+.biz-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow); background:#fafafa } /* 호버 효과입니다 */
 
-/* ================= KPI(숫자 3개) ================= */
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px} /* 숫자 3칸을 가로로 나열합니다 */
-.kpis li{list-style:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;box-shadow:var(--shadow)} /* 각 칸의 모양입니다 */
-.kpi-num{font-size:28px;font-weight:900;color:var(--brand-2)} /* 커다랗게 보이는 숫자입니다 */
-.kpi-label{font-size:12px;color:var(--muted);line-height:1.3;margin-top:4px} /* 숫자 아래 설명입니다 */
+/* ================= KPI(숫자 그리드) — 메인에서 사용 ================= */
+.kpi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px } /* KPI 3칸 배치 + 간격 확대입니다 */
+.kpi-card{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px; text-align:center; box-shadow:var(--shadow) } /* 카드 여백을 늘렸습니다 */
+.kpi-num{ font-size:34px; font-weight:900; color:var(--brand-2) } /* 큰 숫자를 더 키웠습니다 */
+.kpi-label{ font-size:13px; color:var(--muted); margin-top:4px } /* 작은 라벨도 살짝 키웠습니다 */
 
-/* ================= 본문/사이드 ================= */
-.main-grid{display:grid;grid-template-columns:260px 1fr;gap:20px;padding:28px 20px} /* 왼쪽 메뉴와 오른쪽 내용을 나눕니다 */
-.side{position:sticky;top:84px;align-self:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px} /* 왼쪽 메뉴 박스입니다 */
-.side h3{font-size:14px;color:var(--muted);padding:6px 8px} /* 왼쪽 메뉴의 제목입니다 */
-.side a{display:block;text-decoration:none;color:var(--text);padding:10px 10px;border-radius:10px;transition:background var(--speed),padding var(--speed);font-size:15px} /* 왼쪽 메뉴 링크 모양입니다 */
-.side a.active,.side a:hover{background:#fafafa;padding-left:14px} /* 현재/호버 상태의 모양입니다 */
+/* ================= 본문/사이드 — /menu에서 사용 ================= */
+.main-grid{ display:grid; grid-template-columns:260px 1fr; gap:22px; padding:28px 20px } /* 좌우 간격을 넓혀 가독성을 높입니다 */
+.side{ position:sticky; top:84px; align-self:start; background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:12px } /* 왼쪽 메뉴 박스입니다 */
+.side h3{ font-size:15px; color:var(--muted); padding:6px 8px } /* 사이드 제목을 살짝 키웠습니다 */
+.side a{ display:block; text-decoration:none; color:var(--text); padding:12px 12px; border-radius:10px; transition:background var(--speed), padding var(--speed); font-size:16px } /* 왼쪽 링크 글자/여백 확대입니다 */
+.side a.active,
+.side a:hover{ background:#fafafa; padding-left:14px } /* 현재/호버 상태를 강조합니다 */
 
-.content{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;min-height:380px;overflow:hidden} /* 오른쪽 내용 박스입니다 */
-.fade-enter{opacity:0;transform:translateY(6px)} /* 처음엔 살짝 아래 + 투명합니다 */
-.fade-enter-active{opacity:1;transform:translateY(0);transition:opacity var(--speed),transform var(--speed)} /* 부드럽게 나타납니다 */
-.crumbs{font-size:13px;color:var(--muted);margin-bottom:10px} /* 현재 위치 표시(빵부스러기)입니다 */
+.content{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; min-height:380px; overflow:hidden } /* 오른쪽 내용 박스 여백을 늘렸습니다 */
+.fade-enter{ opacity:0; transform:translateY(6px) } /* 처음엔 살짝 아래/투명하게 시작합니다 */
+.fade-enter-active{ opacity:1; transform:translateY(0); transition:opacity var(--speed), transform var(--speed) } /* 부드럽게 나타납니다 */
+.crumbs{ font-size:14px; color:var(--muted); margin-bottom:10px } /* 상단 위치 표시 글씨를 키웠습니다 */
 
 /* ================= 뉴스/공지 스트립 ================= */
-.news-strip{background:#fafafa;border-top:1px solid var(--line);border-bottom:1px solid var(--line)} /* 위아래에 구분선을 넣습니다 */
-.news-strip .wrap{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:14px 20px} /* 공지들을 가로로 나열합니다 */
-.news-item{display:flex;gap:8px;align-items:center;font-size:14px;color:#111;text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;transition:transform var(--speed),box-shadow var(--speed)} /* 공지 한 칸의 모양입니다 */
-.news-item:hover{transform:translateY(-1px);box-shadow:var(--shadow)} /* 살짝 떠오르는 효과입니다 */
-.badge{display:inline-block;background:var(--brand);color:#fff;font-size:12px;padding:2px 6px;border-radius:999px} /* NEW 같은 작은 배지입니다 */
+.news-strip{ background:#fafafa; border-top:1px solid var(--line); border-bottom:1px solid var(--line) } /* 위아래 구분선을 넣습니다 */
+.news-strip .wrap{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; padding:14px 20px } /* 공지를 가로로 나열합니다 */
+.news-item{ display:flex; gap:8px; align-items:center; font-size:14px; color:#111; text-decoration:none; border:1px solid var(--line); background:#fff; border-radius:10px; padding:8px 10px; transition:transform var(--speed), box-shadow var(--speed) } /* 공지 한 칸입니다 */
+.news-item:hover{ transform:translateY(-1px); box-shadow:var(--shadow) } /* 살짝 떠오르는 효과입니다 */
+.badge{ display:inline-block; background:var(--brand); color:#fff; font-size:12px; padding:2px 6px; border-radius:999px } /* 작은 배지입니다 */
 
-/* ================= 푸터 ================= */
-footer{background:#f5f5f5;margin-top:40px;border-top:1px solid var(--line)} /* 푸터의 배경과 윗선입니다 */
-.footer-grid{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px} /* 푸터 안쪽 배치입니다 */
-.f-title{font-weight:900} /* 회사명 글자를 굵게 합니다 */
-.f-text{color:var(--muted);font-size:13px;margin-top:4px} /* 주소/연락처 글자입니다 */
-.f-links{display:flex;gap:12px;flex-wrap:wrap} /* 푸터 링크를 가로로 나열합니다 */
-.f-links a{text-decoration:none;color:#111;border-bottom:1px dashed var(--line)} /* 점선 밑줄로 링크 느낌을 줍니다 */
+/* ================= 메인 전용 점 네비(있으면 적용됨) ================= */
+.dotnav{ position:fixed; right:18px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:12px; z-index:60 } /* 화면 오른쪽 가운데에 점 목록을 둡니다 */
+.dotnav a{ width:12px; height:12px; border-radius:50%; background:#d0d0d0; display:block; border:1px solid var(--line); text-indent:-9999px; overflow:hidden } /* 점 하나의 모양입니다 */
+.dotnav a.active{ background:var(--brand); border-color:var(--brand) } /* 현재 섹션의 점을 빨갛게 표시합니다 */
+.dotnav a:hover{ transform:scale(1.15) } /* 호버 시 점이 살짝 커집니다 */
 
 /* ================= 반응형(화면이 좁을 때) ================= */
 @media (max-width:960px){
-  .hero-grid{grid-template-columns:1fr} /* 히어로를 한 줄로 쌓습니다 */
-  .main-grid{grid-template-columns:1fr} /* 본문도 한 줄로 쌓습니다 */
-  .side{position:relative;top:auto} /* 왼쪽 메뉴를 고정하지 않습니다 */
-  nav.top{display:none} /* 상단 대분류 메뉴는 모바일에서 숨깁니다 */
+  .hero-grid{ grid-template-columns:1fr } /* 히어로를 한 줄로 쌓습니다 */
+  .main-grid{ grid-template-columns:1fr } /* 본문도 한 줄로 쌓습니다 */
+  .side{ position:relative; top:auto } /* 왼쪽 메뉴의 고정을 해제합니다 */
+  nav.top{ display:none } /* 상단 대분류 메뉴는 모바일에서 숨깁니다 */
 }
-
-/* === [로고 이미지 크기 '강제' 통일 — 메인(/) + /menu 공통] =============== */
-header.site .logo{                 /* 헤더 안의 로고 앵커입니다 */
-  display:inline-flex;             /* 로고를 옆 요소와 나란히 배치합니다 */
-  align-items:center;              /* 세로로 가운데 정렬합니다 */
-  gap:0;                           /* 이미지만 쓰므로 간격은 0으로 둡니다 */
-  text-decoration:none;            /* 밑줄을 없앱니다 */
-  font-size:0;                     /* 혹시 숨은 텍스트가 있어도 크기 영향을 없앱니다 */
-  line-height:0;                   /* 행간도 0으로 해서 높이 영향을 막습니다 */
-}
-header.site .logo img{             /* 실제 로고 이미지 태그입니다 */
-  height:20px !important;          /* 데스크톱 기준 높이를 20px로 '강제' 고정합니다 */
-  width:auto;                      /* 가로는 비율에 맞춰 자동으로 맞춥니다 */
-  max-height:20px;                 /* 혹시 다른 규칙이 있어도 20px을 넘지 못하게 합니다 */
-  display:block;                   /* 이미지 아래 여백(공백)을 제거합니다 */
-}
-@media (max-width: 960px){         /* 화면이 좁은(모바일) 경우입니다 */
-  header.site .logo img{
-    height:18px !important;        /* 모바일에서는 18px로 조금 더 작게 고정합니다 */
-    max-height:18px;               /* 최대 높이도 18px로 제한합니다 */
-  }
-}
-
