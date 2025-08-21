@@ -66,8 +66,28 @@
       .hero-title{ font-size:46px; line-height:1.18; }
       .hero-sub{ font-size:18px; margin-top:10px; }
 
-      .section-business .wrap{ padding:60px 24px; }
-      .section-business .desc{ color:var(--muted); margin-bottom:12px; }
+      /* 2섹션: 사업영역(글자 전부 흰색으로) */
+      .section-business .wrap{ padding:60px 24px; }           /* 여백은 유지합니다 */
+
+      /* 설명 문장(회색 → 흰색) + 얇은 그림자 */
+      #s2.page.bg .desc{
+        color:#ffffff;                                        /* 흰색 글자 */
+        text-shadow:0 1px 2px rgba(0,0,0,.35);                /* 사진 위 가독성용 얇은 그림자 */
+        margin-bottom:12px;                                   /* 기존 여백 유지 */
+      }
+
+      /* 큰 2×2 버튼의 글자도 흰색으로(테두리도 살짝 투명한 흰색) */
+      #s2.page.bg .biz-cards .biz-card{
+        color:#ffffff;                                        /* 카드 안 글자를 흰색으로 */
+        border-color:#ffffffcc;                               /* 테두리를 반투명 흰색으로 */
+        background:transparent;                               /* 배경은 투명 유지 */
+      }
+
+      /* 호버 시 은은한 흰 배경 */
+      #s2.page.bg .biz-cards .biz-card:hover{
+        background:#ffffff24;                                 /* 살짝 밝아지는 느낌 */
+      }
+
 
       .kpi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
       .kpi-card{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px; text-align:center; box-shadow:var(--shadow); }
