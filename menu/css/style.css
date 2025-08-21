@@ -199,7 +199,7 @@ html.no-scroll, body.no-scroll{ overflow:hidden }
   .hamburger{ display:inline-flex; transform:scale(.9); } /* 햄버거 표시 + 0.9배 축소 */
   .hero-grid{ grid-template-columns:1fr }  /* 히어로를 한 줄로 */
   .main-grid{ grid-template-columns:1fr }  /* 본문도 한 줄로 */
-  .side{ position:relative; top:auto }     /* 사이드 고정 해제 */
+  .side{ display:none !important; }  /* 모바일(가로 960px 이하)에서는 왼쪽 사이드 메뉴 전체를 숨깁니다 */
 }
 
 
