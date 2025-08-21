@@ -151,11 +151,11 @@ nav.top .dropdown a{
 }
 
 /* (선택) 모바일에서는 너무 커지지 않게 살짝 줄이고 싶다면 아래 주석을 해제하세요 */
-/*
+
 @media (max-width: 960px){
-  :root{ --header-scale: 1.2; }  // 휴대폰에서만 1.2배로 제한
+  :root{ --header-scale: 1.0; }  // 휴대폰에서만 1.0배로 제한
 }
-*/
+
 
 
 
