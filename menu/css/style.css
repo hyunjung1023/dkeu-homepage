@@ -22,7 +22,7 @@ header .wrap{ display:flex; align-items:center; gap:18px } /* 헤더 안 요소�
 
 /* === 이미지 로고(텍스트 제거, 크기 확대 적용) === */
 .logo{ display:inline-flex; align-items:center; text-decoration:none; gap:0; font-size:0; line-height:0 } /* 이미지만 쓰므로 텍스트 영향/여백을 없앱니다 */
-.logo img{ height:24px; width:auto; display:block } /* 데스크톱 로고 높이를 24px로 키웁니다 */
+.logo img{ height:36px; width:auto; display:block } /* 데스크톱 로고 높이를 24px로 키웁니다 */
 @media (max-width:960px){ .logo img{ height:20px } } /* 모바일에서는 20px로 맞춥니다 */
 
 /* === 네비게이션(대분류) === */
