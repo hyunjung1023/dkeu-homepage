@@ -1,79 +1,105 @@
-<!DOCTYPE html> <!-- 이 파일은 /menu/에서 SPA로 동작하는 메인입니다 -->
-<html lang="ko"> <!-- 기본 언어는 한국어입니다 -->
-  <head> <!-- 설정 부분 시작입니다 -->
-    <meta charset="UTF-8" /> <!-- 한글 깨짐을 막습니다 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 모바일 대응입니다 -->
+<!DOCTYPE html> <!-- 이 파일은 /menu/ 경로에서 동작하는 메인입니다(싱글 페이지 앱 진입점입니다) -->
+<html lang="ko"> <!-- 문서의 기본 언어를 한국어로 지정합니다 -->
+  <head> <!-- 브라우저가 읽는 설정 부분의 시작입니다 -->
+    <meta charset="UTF-8" /> <!-- 한글이 깨지지 않도록 UTF-8 인코딩을 씁니다 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 휴대폰에서도 화면이 잘 보이게 합니다 -->
     <title>대광사업단 — 메뉴</title> <!-- 브라우저 탭 제목입니다 -->
-    <link rel="stylesheet" href="css/style.css" /> <!-- /menu/css/style.css 를 불러옵니다 -->
-  </head> <!-- 설정 부분 끝입니다 -->
 
-  <body> <!-- 화면에 보이는 부분 시작입니다 -->
-    <header class="site"> <!-- 상단 고정 헤더입니다 -->
-      <div class="wrap"> <!-- 가운데 정렬 상자입니다 -->
-        <a class="logo" href="/" aria-label="대광사업단"><img src="/img/logo-full.png" alt="대광사업단"></a>
-        <nav class="top" id="topNav"></nav> <!-- 상단 대분류/중분류 메뉴가 자동으로 들어옵니다 -->
-        <div class="actions"> <!-- 오른쪽 CTA와 언어 버튼입니다 -->
-          <a class="btn-ghost" href="#/7-1_ask_estimate">문의하기</a> <!-- 해시 라우팅으로 문의 페이지로 이동합니다 -->
-          <a class="btn-solid" href="#/6-4_data_proposal">브로슈어</a> <!-- 해시 라우팅으로 지명원으로 이동합니다 -->
+    <!-- 공용 스타일: 메인(/)과 완전히 동일한 상단 모양을 위해 같은 CSS를 불러옵니다 -->
+    <!-- ?v=숫자는 캐시를 무력화하기 위한 버전 표시입니다(숫자만 바꿔도 새로 내려받습니다) -->
+    <link rel="stylesheet" href="/menu/css/style.css?v=20250821-2" /> <!-- 상단/드롭다운/버튼 등 공용 스타일 -->
+  </head> <!-- 설정 부분의 끝입니다 -->
+
+  <body> <!-- 눈에 보이는 화면 부분의 시작입니다 -->
+    <header class="site"> <!-- 화면 맨 위에 고정되는 상단바입니다(메인과 동일 구조) -->
+      <div class="wrap"> <!-- 가운데 정렬과 좌우 여백을 담당합니다 -->
+        <a class="logo" href="/" aria-label="대광사업단"><img src="/img/logo-full.png" alt="대광사업단"></a> <!-- 텍스트 없이 이미지 로고만 사용합니다 -->
+        <nav class="top" id="topNav"></nav> <!-- 드롭다운 메뉴가 자바스크립트로 채워질 자리입니다 -->
+        <div class="actions"> <!-- 오른쪽 빠른 버튼 구역입니다 -->
+          <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">문의하기</a> <!-- 절대경로로 통일해 메인/메뉴 모두 동일하게 보이게 합니다 -->
+          <!-- 메인과 동일 유지를 위해 '브로슈어' 버튼은 제거했습니다 -->
           <button class="lang" id="langKR">KR</button> <!-- 한국어 안내 버튼입니다 -->
           <button class="lang" id="langEN">EN</button> <!-- 영어 안내 버튼입니다 -->
-        </div> <!-- 오른쪽 버튼 영역의 끝입니다 -->
-      </div> <!-- 헤더 안쪽 상자의 끝입니다 -->
-    </header> <!-- 헤더의 끝입니다 -->
+        </div> <!-- 오른쪽 버튼 구역의 끝입니다 -->
+      </div> <!-- 상단 내부 컨테이너의 끝입니다 -->
+    </header> <!-- 상단바의 끝입니다 -->
 
-    <section class="hero"> <!-- /menu/의 히어로 영역입니다 -->
-      <div class="wrap hero-grid"> <!-- 좌우 2칸 배치 상자입니다 -->
-        <div class="hero-left"> <!-- 왼쪽 소개 영역입니다 -->
-          <div class="eyebrow">WHO WE ARE.</div> <!-- 얇은 영어 소제목입니다 -->
-          <h1 class="hero-title">전기·통신·소방<br />토탈 솔루션 파트너</h1> <!-- 큰 제목입니다 -->
-          <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧은 설명입니다 -->
-          <div class="hero-ctas"> <!-- 히어로 안 버튼 묶음입니다 -->
-            <a class="btn-solid" href="#/3-1_work_electric_eng">주요실적 보기</a> <!-- 해시로 이동합니다 -->
-            <a class="btn-ghost" href="#/7-1_ask_estimate">견적문의</a> <!-- 해시로 이동합니다 -->
+    <section class="hero"> <!-- 상단 소개(히어로) 영역입니다 -->
+      <div class="wrap hero-grid"> <!-- 좌우 2칸 레이아웃을 만드는 상자입니다 -->
+        <div class="hero-left"> <!-- 왼쪽 텍스트 구역입니다 -->
+          <div class="eyebrow">WHO WE ARE.</div> <!-- 얇고 작은 영어 소제목입니다 -->
+          <h1 class="hero-title">전기·통신·소방<br />토탈 솔루션 파트너</h1> <!-- 가장 큰 핵심 문장입니다 -->
+          <p class="hero-sub">설계·시공·감리까지 한 번에 책임지는 대광사업단</p> <!-- 짧은 보조 설명입니다 -->
+          <div class="hero-ctas"> <!-- 주요 이동 버튼 묶음입니다 -->
+            <a class="btn-solid" href="/menu/#/3-1_work_electric_eng">주요실적 보기</a> <!-- /menu 내부로 이동합니다 -->
+            <a class="btn-ghost" href="/menu/#/7-1_ask_estimate">견적문의</a> <!-- /menu 내부로 이동합니다 -->
           </div> <!-- 버튼 묶음의 끝입니다 -->
 
-          <ul class="kpis"> <!-- 핵심 숫자 3칸입니다 -->
-            <li><div class="kpi-num" data-count="10">0</div><div class="kpi-label">Years<br />설립 후</div></li> <!-- 10까지 카운트됩니다 -->
-            <li><div class="kpi-num" data-count="20">0</div><div class="kpi-label">개<br />함께하는 서울 자치구</div></li> <!-- 20까지 카운트됩니다 -->
-            <li><div class="kpi-num" data-count="300">0</div><div class="kpi-label">개<br />프로젝트</div></li> <!-- 300까지 카운트됩니다 -->
-          </ul> <!-- 핵심 숫자 끝입니다 -->
-        </div> <!-- 왼쪽 소개 영역의 끝입니다 -->
+          <ul class="kpis"> <!-- 핵심 숫자 3개를 보여주는 목록입니다 -->
+            <li> <!-- 첫 번째 숫자 카드입니다 -->
+              <div class="kpi-num" data-count="10">0</div> <!-- 목표 숫자(10)까지 카운트업됩니다 -->
+              <div class="kpi-label">Years<br />설립 후</div> <!-- 숫자 설명입니다 -->
+            </li>
+            <li> <!-- 두 번째 숫자 카드입니다 -->
+              <div class="kpi-num" data-count="20">0</div> <!-- 목표 숫자(20)까지 카운트업됩니다 -->
+              <div class="kpi-label">개<br />함께하는 서울 자치구</div> <!-- 숫자 설명입니다 -->
+            </li>
+            <li> <!-- 세 번째 숫자 카드입니다 -->
+              <div class="kpi-num" data-count="300">0</div> <!-- 목표 숫자(300)까지 카운트업됩니다 -->
+              <div class="kpi-label">개<br />프로젝트</div> <!-- 숫자 설명입니다 -->
+            </li>
+          </ul> <!-- 핵심 숫자 목록의 끝입니다 -->
+        </div> <!-- 왼쪽 텍스트 구역의 끝입니다 -->
 
-        <div class="hero-card"> <!-- 오른쪽 바로가기 카드입니다 -->
-          <strong class="quick-title">Business Solutions</strong> <!-- 카드 제목입니다 -->
-          <div class="biz-cards"> <!-- 큰 카드 4개를 2×2로 배치합니다 -->
-            <a class="biz-card" href="#/2-1_biz_electric"><span>전기</span></a> <!-- 해시로 전기 사업 -->
-            <a class="biz-card" href="#/2-2_biz_telecom"><span>통신</span></a> <!-- 해시로 통신 사업 -->
-            <a class="biz-card" href="#/2-3_biz_fire"><span>소방</span></a> <!-- 해시로 소방 사업 -->
-            <a class="biz-card" href="#/2-4_biz_partner"><span>주요파트너</span></a> <!-- 해시로 파트너 -->
-          </div> <!-- 카드 4개 끝입니다 -->
-        </div> <!-- 오른쪽 카드 끝입니다 -->
-      </div> <!-- 히어로 안쪽 상자 끝입니다 -->
-    </section> <!-- 히어로 끝입니다 -->
+        <div class="hero-card"> <!-- 오른쪽 빠른 이동 카드입니다 -->
+          <strong class="quick-title">Business Solutions</strong> <!-- 카드의 작은 제목입니다 -->
+          <div class="biz-cards"> <!-- 2×2로 배치한 큰 버튼들입니다 -->
+            <a class="biz-card" href="/menu/#/2-1_biz_electric"><span>전기</span></a> <!-- 전기 사업으로 -->
+            <a class="biz-card" href="/menu/#/2-2_biz_telecom"><span>통신</span></a> <!-- 통신 사업으로 -->
+            <a class="biz-card" href="/menu/#/2-3_biz_fire"><span>소방</span></a> <!-- 소방 사업으로 -->
+            <a class="biz-card" href="/menu/#/2-4_biz_partner"><span>주요파트너</span></a> <!-- 파트너 소개로 -->
+          </div> <!-- 큰 버튼 그리드의 끝입니다 -->
+        </div> <!-- 오른쪽 카드의 끝입니다 -->
+      </div> <!-- 히어로 내부 컨테이너의 끝입니다 -->
+    </section> <!-- 히어로 영역의 끝입니다 -->
 
-    <main> <!-- 본문(좌:사이드, 우:내용) 영역입니다 -->
-      <div class="wrap main-grid"> <!-- 2칸 배치 상자입니다 -->
-        <aside class="side" id="sideNav"><h3>메뉴</h3></aside> <!-- 왼쪽 메뉴입니다 -->
-        <section class="content" id="content"></section> <!-- 오른쪽 내용이 바뀌며 보여질 자리입니다 -->
-      </div> <!-- 본문 안쪽 상자 끝입니다 -->
-    </main> <!-- 본문 끝입니다 -->
+    <main> <!-- 본문(좌측 사이드 메뉴 + 우측 내용) 영역입니다 -->
+      <div class="wrap main-grid"> <!-- 왼쪽/오른쪽 2칸 레이아웃을 만듭니다 -->
+        <aside class="side" id="sideNav"><h3>메뉴</h3></aside> <!-- 왼쪽에 중분류 링크들이 들어옵니다 -->
+        <section class="content" id="content"></section> <!-- 오른쪽에 실제 내용이 로드됩니다 -->
+      </div> <!-- 본문 내부 컨테이너의 끝입니다 -->
+    </main> <!-- 본문 영역의 끝입니다 -->
 
-    <section class="news-strip"> <!-- 하단 공지 간단 리스트입니다 -->
-      <div class="wrap" id="newsStrip"></div> <!-- 자바스크립트로 항목이 들어옵니다 -->
-    </section> <!-- 공지 스트립 끝입니다 -->
+    <section class="news-strip"> <!-- 하단 공지/뉴스 간단 리스트입니다 -->
+      <div class="wrap" id="newsStrip"></div> <!-- 자바스크립트가 항목들을 채워 넣습니다 -->
+    </section> <!-- 공지/뉴스 스트립의 끝입니다 -->
 
-    <footer>
-      <div class="wrap footer-grid">
-        <div class="f-brand"><div class="f-title">주식회사 대광사업단</div><div class="f-text">서울특별시 금천구 (예시 주소) · 02-000-0000</div></div> <!-- 회사 정보입니다 -->
-        <div class="f-links">
-          <a href="#/1-3_intro_about">기업개요</a> <!-- 해시 라우팅 링크들입니다 -->
-          <a href="#/6-3_data_certificate">인증서</a>
-          <a href="#/8-1_notice_board">공지사항</a>
-          <a href="#/7-1_ask_estimate">문의하기</a>
+    <footer> <!-- 맨 아래 회사/링크 정보입니다 -->
+      <div class="wrap footer-grid"> <!-- 푸터 내부 배치 상자입니다 -->
+        <div class="f-brand"> <!-- 회사 정보 블록입니다 -->
+          <div class="f-title">주식회사 대광사업단</div> <!-- 회사명입니다 -->
+          <div class="f-text">서울특별시 금천구 (예시 주소) · 02-000-0000</div> <!-- 주소/연락처 예시입니다 -->
+        </div>
+        <div class="f-links"> <!-- 자주 쓰는 페이지 링크 모음입니다 -->
+          <a href="/menu/#/1-3_intro_about">기업개요</a> <!-- 기업개요로 이동 -->
+          <a href="/menu/#/6-3_data_certificate">인증서</a> <!-- 인증서로 이동 -->
+          <a href="/menu/#/8-1_notice_board">공지사항</a> <!-- 공지사항으로 이동 -->
+          <a href="/menu/#/7-1_ask_estimate">문의하기</a> <!-- 문의로 이동 -->
         </div>
       </div>
-    </footer>
+    </footer> <!-- 푸터의 끝입니다 -->
 
-    <script type="module" src="js/app.js"></script> <!-- /menu/js/app.js 를 불러옵니다 -->
-  </body> <!-- 화면 부분 끝입니다 -->
-</html> <!-- 문서 끝입니다 -->
+    <!-- SPA 라우터/콘텐츠 렌더링 로직(기존 파일) -->
+    <script type="module" src="/menu/js/app.js"></script> <!-- /menu 내부 페이지 전환을 처리합니다 -->
+
+    <!-- 공용 상단 스크립트: 메인(/)과 동일한 헤더를 만드는 모듈입니다 -->
+    <!-- 주의: app.js 안에 상단을 만들던 코드가 있다면 중복되므로 제거/주석 처리해 주세요 -->
+    <script type="module">
+      import { buildTopNav, wireLangButtons } from '/menu/js/topnav.js'; /* 공용 헤더 모듈을 불러옵니다 */
+      window.addEventListener('DOMContentLoaded', () => { /* 문서가 준비되면 */
+        buildTopNav();       /* 드롭다운 메뉴(대/중분류)를 공통 로직으로 그립니다 */
+        wireLangButtons();   /* KR/EN 안내 버튼을 공통 로직으로 연결합니다 */
+      }); /* 초기 실행의 끝입니다 */
+    </script>
+  </body> <!-- 화면 부분의 끝입니다 -->
+</html> <!-- 문서의 끝입니다 -->
