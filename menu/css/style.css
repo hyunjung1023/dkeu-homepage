@@ -101,3 +101,58 @@ nav.top .dropdown a:hover{ background:#fafafa; padding-left:16px } /* 항목 호
   .side{ position:relative; top:auto } /* 왼쪽 메뉴의 고정을 해제합니다 */
   nav.top{ display:none } /* 상단 대분류 메뉴는 모바일에서 숨깁니다 */
 }
+
+
+
+/* ================== [헤더 2배 확대 — 메인(/) + /menu 공통 오버라이드] ================== */
+/* 배율을 숫자로 정합니다. 2 → 2배, 1.5 → 1.5배, 1 → 원래 크기 */
+:root{
+  --header-scale: 2; /* 상단바(로고/메뉴)의 기본 배율을 2배로 정합니다 */
+}
+
+/* 헤더 안에서 쓸 계산용 변수를 만듭니다 */
+header.site{
+  --logo-h: calc(20px * var(--header-scale));      /* 로고 이미지 기본높이(기존 20px의 배율) */
+  --menu-fs: calc(16px * var(--header-scale));      /* 대분류 버튼 글자 크기(기본 16px의 배율) */
+  --menu-pad-v: calc(10px * var(--header-scale));   /* 대분류 버튼 상하 여백 */
+  --menu-pad-h: calc(12px * var(--header-scale));   /* 대분류 버튼 좌우 여백 */
+  --drop-fs: calc(14px * var(--header-scale));      /* 드롭다운 항목 글자 크기(기본 14px의 배율) */
+}
+
+/* 로고 이미지 크기를 배율에 맞춰 키웁니다 */
+header.site .logo img{
+  height: var(--logo-h) !important; /* 기존 20px 규칙을 확실히 덮어씁니다 */
+  max-height: var(--logo-h);        /* 혹시 다른 곳에서 제한해도 배율 높이로 맞춥니다 */
+  width: auto;                      /* 가로는 비율대로 자동 조정합니다 */
+  display: block;                   /* 이미지 밑 여백(행간)을 없앱니다 */
+}
+
+/* 상단 대분류 버튼(텍스트) 크기와 여백을 키웁니다 */
+nav.top .menu-btn{
+  font-size: var(--menu-fs);                     /* 글자 크기를 2배로 */
+  padding: var(--menu-pad-v) var(--menu-pad-h);  /* 여백도 2배로 */
+  border-radius: calc(10px * var(--header-scale)); /* 둥근 정도도 비례 확대(선택) */
+}
+
+/* 드롭다운 항목(중분류) 글자와 여백을 키웁니다 */
+nav.top .dropdown a{
+  font-size: var(--drop-fs);                                           /* 글자 크기를 2배로 */
+  padding: calc(10px * var(--header-scale)) calc(12px * var(--header-scale)); /* 여백 확대 */
+  border-radius: calc(10px * var(--header-scale));                     /* 둥근 정도 확대(선택) */
+}
+
+/* (선택) 나중에 버튼들을 다시 살릴 때 함께 크게 보이도록 준비해 둡니다 */
+.actions .btn-ghost,
+.actions .btn-solid,
+.lang{
+  font-size: var(--menu-fs);                                 /* 버튼/언어 글자도 2배 */
+  padding: calc(8px * var(--header-scale)) calc(12px * var(--header-scale)); /* 여백 2배 */
+  border-radius: calc(10px * var(--header-scale));           /* 둥근 정도 2배(선택) */
+}
+
+/* (선택) 모바일에서는 너무 커지지 않게 살짝 줄이고 싶다면 아래 주석을 해제하세요 */
+/*
+@media (max-width: 960px){
+  :root{ --header-scale: 1.2; }  // 휴대폰에서만 1.2배로 제한
+}
+*/
