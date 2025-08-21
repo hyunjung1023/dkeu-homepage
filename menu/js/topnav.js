@@ -1,65 +1,130 @@
-// /menu/js/topnav.js  ← 메인(/)과 /menu/가 함께 쓰는 "공용 헤더 스크립트" 파일입니다
+// /menu/js/topnav.js
+// 메인(/)과 /menu 공통 상단바(데스크톱 드롭다운 + 모바일 햄버거)를 구성합니다.
+import { SITE_MAP } from './data/site_map.js';
 
-import { SITE_MAP } from '/menu/js/data/site_map.js'; // 메뉴 구조 데이터를 가져옵니다(대분류·중분류 목록입니다)
+const isMenu = location.pathname.startsWith('/menu');
+const hrefFor = (code) => isMenu ? `#/${code}` : `/menu/#/${code}`;
 
-// 선택자(예: '#topNav')로 화면에서 요소 하나를 찾아주는 간단한 도우미입니다
-const $ = (sel) => document.querySelector(sel);
-
-// 상단 드롭다운 메뉴(대분류 버튼 + 중분류 목록)를 만들어 넣는 함수입니다
-export function buildTopNav(){                           // 다른 파일에서 쓸 수 있도록 export 합니다
-  const nav = $('#topNav');                              // 상단 메뉴가 들어갈 비어 있는 <nav id="topNav">를 찾습니다
-  if(!nav) return;                                       // 만약 못 찾으면 더 이상 하지 않고 그대로 끝냅니다(안전장치입니다)
-
-  nav.innerHTML = '';                                    // 혹시 전에 있던 내용이 있다면 싹 비웁니다(깨끗한 상태로 시작)
-
-  // SITE_MAP 안에 대분류들이 들어있습니다. 하나씩 꺼내서 버튼을 만듭니다.
-  SITE_MAP.forEach(group => {                            // group.title = 대분류 이름, group.items = 중분류 배열
-    const btn = document.createElement('button');        // 대분류 버튼을 하나 만듭니다
-    btn.className = 'menu-btn';                          // 버튼에 모양(스타일) 클래스를 붙입니다
-    btn.type = 'button';                                 // 폼 버튼이 아니라고 표시합니다(엔터 눌러도 제출 안 되게)
-    btn.textContent = group.title;                       // 버튼 글자를 대분류 이름으로 적습니다
-    btn.setAttribute('aria-haspopup','true');            // 접근성: 이 버튼은 하위 메뉴를 가진다고 알려줍니다
-    btn.setAttribute('aria-expanded','false');           // 접근성: 기본은 펼쳐지지 않았다고 표시합니다
-
-    const dd = document.createElement('div');            // 버튼 아래에 보일 드롭다운 상자를 만듭니다
-    dd.className = 'dropdown';                           // 드롭다운 스타일 클래스를 붙입니다
-    dd.setAttribute('role','menu');                      // 접근성: 메뉴 역할이라고 알려줍니다
-
-    // 중분류 항목들을 하나씩 만들어 드롭다운 안에 넣습니다
-    group.items.forEach(it => {                          // it.title = 항목 이름, it.code = 링크 코드
-      const a = document.createElement('a');             // 링크를 하나 만듭니다
-      a.href = `/menu/#/${it.code}`;                     // /menu로 가서 해시 라우팅으로 해당 페이지를 열게 합니다
-      a.textContent = it.title;                          // 링크 글자를 중분류 이름으로 적습니다
-      a.setAttribute('role','menuitem');                 // 접근성: 이 링크는 메뉴 항목이라고 알려줍니다
-      dd.appendChild(a);                                 // 만든 링크를 드롭다운 상자 안에 넣습니다
+/* 데스크톱: 상단 드롭다운 네비 */
+function buildDesktopNav(){
+  const nav = document.getElementById('topNav');
+  if(!nav) return;
+  nav.innerHTML = '';
+  SITE_MAP.forEach(group=>{
+    const btn = document.createElement('button');
+    btn.className = 'menu-btn';
+    btn.textContent = group.title;
+    const dd = document.createElement('div');
+    dd.className = 'dropdown';
+    group.items.forEach(it=>{
+      const a = document.createElement('a');
+      a.href = hrefFor(it.code);
+      a.textContent = it.title;
+      dd.appendChild(a);
     });
-
-    // 만들어둔 드롭다운을 버튼 밑에 붙입니다
-    btn.appendChild(dd);                                 // 버튼 → 드롭다운 순서대로 붙입니다
-
-    // 키보드 접근성을 조금 돕기 위해 포커스 들어오고 나갈 때 aria-expanded 값을 바꿔줍니다
-    btn.addEventListener('focus', () => {                // 버튼에 포커스가 오면
-      btn.setAttribute('aria-expanded','true');          // 펼쳐졌다고 표시합니다(시각적 표시는 CSS :hover가 담당)
-    });
-    btn.addEventListener('blur', () => {                 // 버튼에서 포커스가 나가면
-      btn.setAttribute('aria-expanded','false');         // 접혔다고 표시합니다
-    });
-
-    // 완성된 버튼(대분류+드롭다운)을 상단 <nav> 안에 넣습니다
-    nav.appendChild(btn);                                // 상단 메뉴줄에 버튼을 추가합니다
+    btn.appendChild(dd);
+    nav.appendChild(btn);
   });
 }
 
-// KR/EN 언어 버튼을 눌렀을 때 간단한 안내창을 띄워주는 함수입니다
-export function wireLangButtons(){                       // 다른 파일에서 쓸 수 있도록 export 합니다
-  const kr = $('#langKR');                               // 한국어 안내 버튼을 찾습니다
-  const en = $('#langEN');                               // 영어 안내 버튼을 찾습니다
-  if(kr) kr.onclick = () => alert('한국어가 기본입니다.'); // KR 버튼을 누르면 한국어 기본이라고 알려줍니다
-  if(en) en.onclick = () => alert('English version is under preparation.'); // EN 버튼을 누르면 준비 중이라고 알려줍니다
+/* 모바일: 햄버거 버튼 + 우측 슬라이드 드로어 */
+function buildMobileNav(){
+  const wrap = document.querySelector('header.site .wrap');
+  if(!wrap) return;
+
+  // 햄버거 버튼이 이미 있으면 재구축하지 않음
+  if(document.getElementById('hamBtn')) return;
+
+  // 1) 햄버거 버튼
+  const ham = document.createElement('button');
+  ham.className = 'hamburger';
+  ham.id = 'hamBtn';
+  ham.setAttribute('aria-label','메뉴 열기');
+  ham.setAttribute('aria-expanded','false');
+  ham.innerHTML = '<span></span><span></span><span></span>';
+  wrap.appendChild(ham); // nav.top 뒤쪽에 붙이므로 모바일에서 오른쪽에 보입니다
+
+  // 2) 배경 & 패널
+  let backdrop = document.getElementById('mnavBg');
+  let panel    = document.getElementById('mnavPanel');
+
+  if(!backdrop){
+    backdrop = document.createElement('div');
+    backdrop.id = 'mnavBg';
+    backdrop.className = 'mnav-backdrop';
+    document.body.appendChild(backdrop);
+  }
+  if(!panel){
+    panel = document.createElement('aside');
+    panel.id = 'mnavPanel';
+    panel.className = 'mnav';
+    panel.innerHTML = `
+      <div class="mnav-head">
+        <button class="mnav-close" id="mnavClose" aria-label="메뉴 닫기">×</button>
+      </div>
+      <nav class="mnav-body" id="mnavBody"></nav>
+    `;
+    document.body.appendChild(panel);
+  }
+
+  const body = panel.querySelector('#mnavBody');
+  body.innerHTML = '';
+
+  // 3) 대분류 + 중분류(아코디언)
+  SITE_MAP.forEach(group=>{
+    const box = document.createElement('div');
+
+    const gbtn = document.createElement('button');
+    gbtn.type = 'button';
+    gbtn.className = 'mnav-group-btn';
+    gbtn.textContent = group.title;
+
+    const sub = document.createElement('div');
+    sub.className = 'mnav-sub';
+
+    group.items.forEach(it=>{
+      const a = document.createElement('a');
+      a.href = hrefFor(it.code);
+      a.textContent = it.title;
+      sub.appendChild(a);
+    });
+
+    gbtn.addEventListener('click', ()=>{
+      // 다른 열린 것 닫고 이 그룹만 토글
+      body.querySelectorAll('.mnav-sub').forEach(el=>{ if(el!==sub) el.classList.remove('open'); });
+      sub.classList.toggle('open');
+    });
+
+    box.appendChild(gbtn);
+    box.appendChild(sub);
+    body.appendChild(box);
+  });
+
+  // 4) 열고 닫기
+  const open  = ()=>{ panel.classList.add('on'); backdrop.classList.add('on'); ham.setAttribute('aria-expanded','true'); document.documentElement.classList.add('no-scroll'); };
+  const close = ()=>{ panel.classList.remove('on'); backdrop.classList.remove('on'); ham.setAttribute('aria-expanded','false'); document.documentElement.classList.remove('no-scroll'); };
+
+  ham.onclick = open;
+  backdrop.onclick = close;
+  panel.querySelector('#mnavClose').onclick = close;
+
+  // 링크 클릭 시 자동 닫힘
+  body.addEventListener('click', (e)=>{
+    const t = e.target;
+    if(t && t.tagName === 'A'){ close(); }
+  });
 }
 
-// (선택) 한 줄로 상단을 초기화하고 싶을 때 쓰는 편의 함수입니다
-export function initTopBar(){                            // 필요하면 이 함수 하나만 불러도 됩니다
-  buildTopNav();                                         // 상단 드롭다운을 먼저 그립니다
-  wireLangButtons();                                     // 언어 버튼 동작을 연결합니다
+/* 외부에서 쓸 초기화 함수 */
+export function initTopBar(){
+  buildDesktopNav();
+  buildMobileNav();
 }
+
+/* (선택) 상단 스케일을 한 줄로 조정하고 싶을 때 사용할 수 있습니다 */
+export function setHeaderScale(scale){
+  document.documentElement.style.setProperty('--header-scale', String(scale));
+}
+
+/* (선택) 활성 표시 갱신 훅 — 필요 시 확장 가능 */
+export function refreshActive(){ /* 현재는 생략 */ }
