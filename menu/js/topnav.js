@@ -1,4 +1,4 @@
-// /menu/js/topnav.js  ← 두 페이지가 공통으로 불러올 헤더 스크립트입니다
+// /menu/js/topnav.js  ← 두 페이지가 공통으로 불러올 헤더 스크립트입니다. 즉 상단바스타일은 다 여기서 조정!!
 
 import { SITE_MAP } from '/menu/js/data/site_map.js'; // 메뉴 구조 데이터를 불러옵니다
 
