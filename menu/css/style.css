@@ -112,7 +112,7 @@ nav.top .dropdown a:hover{ background:#fafafa; padding-left:16px } /* 항목 호
 
 /* 헤더 안에서 쓸 계산용 변수를 만듭니다 */
 header.site{
-  --logo-h: calc(20px * var(--header-scale));      /* 로고 이미지 기본높이(기존 20px의 배율) */
+  --logo-h: calc(40px * var(--header-scale));      /* 로고 이미지 기본높이(40px의 배율) */
   --menu-fs: calc(16px * var(--header-scale));      /* 대분류 버튼 글자 크기(기본 16px의 배율) */
   --menu-pad-v: calc(10px * var(--header-scale));   /* 대분류 버튼 상하 여백 */
   --menu-pad-h: calc(12px * var(--header-scale));   /* 대분류 버튼 좌우 여백 */
