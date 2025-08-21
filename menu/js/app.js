@@ -3,6 +3,8 @@ import { SITE_MAP } from './data/site_map.js'; // 메뉴 구조(대분류/중분
 import { PAGE_CONTENT, FAQ, NOTICES } from './data/content.js'; // 일반 콘텐츠/FAQ/공지 데이터입니다
 import { renderEstimate, renderFAQ, renderNotice } from './components/pages.js'; // 특수 페이지 렌더 함수입니다
 import { initTopBar } from '/menu/js/topnav.js'; // ★ 상단(로고/드롭다운/언어) 공용 스크립트입니다
+import { renderGreeting } from './components/greeting.js';  // 인사말 전용 컴포넌트를 가져와요.
+import { GREETING } from './data/content.js'; // 인사말에 쓸 데이터 묶음(GREETING)을 가져와요.
 
 // ===== 편의 함수들입니다 =======================================================
 const $ = (s)=>document.querySelector(s); // 선택자 문자열로 요소 하나를 찾아옵니다
@@ -53,6 +55,7 @@ function getTemplateFor(code){ // 코드에 맞는 렌더 함수를 선택합니
   if(code==='7-1_ask_estimate') return renderEstimate(); // 견적/문의 폼 페이지입니다
   if(code==='7-2_ask_faq')      return renderFAQ(FAQ); // FAQ 리스트 페이지입니다
   if(code==='8-1_notice_board') return renderNotice(NOTICES); // 공지사항 표 페이지입니다
+  if(code === '1-1_intro_greeting') return renderGreeting(GREETING); // "회사소개 > 인사말" 코드가 들어오면 인사말 전용 화면을 그려요.
   return renderGeneric(code); // 위에 없는 코드는 일반 페이지로 렌더합니다
 } // getTemplateFor 함수 끝입니다
 
